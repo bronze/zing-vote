@@ -33,7 +33,7 @@ export const ResultBar = ({
   }, [animate]);
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 teste">
       {/* Option A Result */}
       <div className="space-y-2">
         <div className="flex justify-between items-center">
