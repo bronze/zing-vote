@@ -85,11 +85,11 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false }: PalpiteC
           {/* Result bars */}
           <div className="result-container">
             <div 
-              className="result-bar-sim transition-all duration-700 ease-out"
+              className="result-bar result-bar-sim transition-all duration-700 ease-out"
               style={{ width: `${percentageA}%` }}
             />
             <div 
-              className="result-bar-nao transition-all duration-700 ease-out"
+              className="result-bar result-bar-nao transition-all duration-700 ease-out"
               style={{ width: `${percentageB}%` }}
             />
           </div>
@@ -121,11 +121,11 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false }: PalpiteC
           {/* Preview result bars (before voting) */}
           <div className="result-container">
             <div 
-              className="result-bar-sim"
+              className="result-bar result-bar-sim"
               style={{ width: `${percentageA}%` }}
             />
             <div 
-              className="result-bar-nao"
+              className="result-bar result-bar-nao"
               style={{ width: `${percentageB}%` }}
             />
           </div>
