@@ -85,29 +85,29 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false }: PalpiteC
           {/* Result bars */}
           <div className="result-container">
             <div 
-              className="result-bar-sim"
+              className="result-bar-sim transition-all duration-700 ease-out"
               style={{ width: `${percentageA}%` }}
             />
             <div 
-              className="result-bar-nao"
+              className="result-bar-nao transition-all duration-700 ease-out"
               style={{ width: `${percentageB}%` }}
             />
           </div>
 
           {/* Vote counts and percentages */}
           <div className="flex justify-between items-center text-xs">
-            <div className="text-left">
+            <div className="flex items-center gap-2">
               <span className={`font-semibold ${userVote === 'option_a' ? 'text-vote-sim' : 'text-muted-foreground'}`}>
-                SIM • {percentageA.toFixed(0)}%
+                {question.option_a} • {percentageA.toFixed(0)}%
               </span>
               <br />
               <span className="text-muted-foreground">
                 {currentVotes.votesA.toLocaleString()} votos
               </span>
             </div>
-            <div className="text-right">
+            <div className="flex items-center gap-2">
               <span className={`font-semibold ${userVote === 'option_b' ? 'text-vote-nao' : 'text-muted-foreground'}`}>
-                NÃO • {percentageB.toFixed(0)}%
+                {question.option_b} • {percentageB.toFixed(0)}%
               </span>
               <br />
               <span className="text-muted-foreground">
