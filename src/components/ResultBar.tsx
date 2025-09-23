@@ -44,7 +44,7 @@ export const ResultBar = ({
             {percentageA.toFixed(0)}%
           </span>
         </div>
-        <div className="h-3 bg-muted rounded-full overflow-hidden">
+        <div className="h-3 rounded-lg overflow-hidden" style={{ backgroundColor: 'hsl(var(--vote-track-bg))' }}>
           <div 
             className={`h-full result-bar-a transition-all duration-700 ease-out ${
               isAnimating ? 'animate-pulse' : ''
@@ -69,7 +69,7 @@ export const ResultBar = ({
             {percentageB.toFixed(0)}%
           </span>
         </div>
-        <div className="h-3 bg-muted rounded-full overflow-hidden">
+        <div className="h-3 rounded-lg overflow-hidden" style={{ backgroundColor: 'hsl(var(--vote-track-bg))' }}>
           <div 
             className={`h-full result-bar-b transition-all duration-700 ease-out delay-100 ${
               isAnimating ? 'animate-pulse' : ''

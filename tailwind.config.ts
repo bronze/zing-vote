@@ -58,6 +58,8 @@ export default {
           foreground: "hsl(var(--vote-nao-foreground))",
           glow: "hsl(var(--vote-nao-glow))",
         },
+        "vote-button-bg": "hsl(var(--vote-button-bg))",
+        "vote-track-bg": "hsl(var(--vote-track-bg))",
         "category-futebol": "hsl(var(--category-futebol))",
         "category-politica": "hsl(var(--category-politica))",
         "category-celebridades": "hsl(var(--category-celebridades))",
