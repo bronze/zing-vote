@@ -89,6 +89,7 @@
   /* Palpite-style voting cards */
   .palpite-card {
     @apply bg-card border border-border/50 rounded-xl transition-all duration-200 hover:bg-secondary/50;
+    background: rgba(69, 118, 122, 0.18);
   }
 
   .category-badge {
