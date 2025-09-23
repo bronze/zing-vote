@@ -127,15 +127,20 @@
     @apply ring-2 ring-primary;
   }
 
-  /* Result bars with new Figma colors */
-  .result-bar-a {
-    background-color: hsl(var(--vote-sim));
-    @apply rounded-lg h-3 transition-all duration-300 ease-out;
+  /* Result bars with Figma-style side-by-side layout */
+  .result-container {
+    @apply flex h-5 rounded-lg overflow-hidden mb-3;
+    background-color: hsl(var(--vote-track-bg));
   }
 
-  .result-bar-b {
+  .result-bar-sim {
+    background-color: hsl(var(--vote-sim));
+    @apply transition-all duration-700 ease-out;
+  }
+
+  .result-bar-nao {
     background-color: hsl(var(--vote-nao));
-    @apply rounded-lg h-3 transition-all duration-300 ease-out;
+    @apply transition-all duration-700 ease-out;
   }
 
   /* Text colors for options */

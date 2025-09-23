@@ -85,31 +85,33 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false }: PalpiteC
           {/* Result bars */}
           <div className="result-container">
             <div 
-              className="result-bar-sim transition-all duration-700 ease-out"
+              className="result-bar-sim"
               style={{ width: `${percentageA}%` }}
             />
             <div 
-              className="result-bar-nao transition-all duration-700 ease-out"
+              className="result-bar-nao"
               style={{ width: `${percentageB}%` }}
             />
           </div>
 
-          {/* Vote counts */}
-          <div className="flex justify-between text-xs">
-            <div className="flex items-center gap-2">
-              <span className={`font-semibold ${userVote === 'option_a' ? 'text-green-400' : 'text-muted-foreground'}`}>
-                {question.option_a} • {percentageA.toFixed(0)}%
+          {/* Vote counts and percentages */}
+          <div className="flex justify-between items-center text-xs">
+            <div className="text-left">
+              <span className={`font-semibold ${userVote === 'option_a' ? 'text-vote-sim' : 'text-muted-foreground'}`}>
+                SIM • {percentageA.toFixed(0)}%
               </span>
+              <br />
               <span className="text-muted-foreground">
                 {currentVotes.votesA.toLocaleString()} votos
               </span>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="text-right">
+              <span className={`font-semibold ${userVote === 'option_b' ? 'text-vote-nao' : 'text-muted-foreground'}`}>
+                NÃO • {percentageB.toFixed(0)}%
+              </span>
+              <br />
               <span className="text-muted-foreground">
                 {currentVotes.votesB.toLocaleString()} votos
-              </span>
-              <span className={`font-semibold ${userVote === 'option_b' ? 'text-red-400' : 'text-muted-foreground'}`}>
-                {percentageB.toFixed(0)}% • {question.option_b}
               </span>
             </div>
           </div>
@@ -128,10 +130,18 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false }: PalpiteC
             />
           </div>
 
-          {/* Vote counts */}
-          <div className="flex justify-between text-xs text-muted-foreground">
-            <span>{question.option_a} • {percentageA.toFixed(0)}% • {currentVotes.votesA.toLocaleString()} votos</span>
-            <span>{currentVotes.votesB.toLocaleString()} votos • {percentageB.toFixed(0)}% • {question.option_b}</span>
+          {/* Vote counts and percentages */}
+          <div className="flex justify-between items-center text-xs text-muted-foreground">
+            <div className="text-left">
+              <span>SIM • {percentageA.toFixed(0)}%</span>
+              <br />
+              <span>{currentVotes.votesA.toLocaleString()} votos</span>
+            </div>
+            <div className="text-right">
+              <span>NÃO • {percentageB.toFixed(0)}%</span>
+              <br />
+              <span>{currentVotes.votesB.toLocaleString()} votos</span>
+            </div>
           </div>
         </div>
       )}
@@ -141,7 +151,7 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false }: PalpiteC
         <motion.button
           onClick={() => handleVote('option_a')}
           disabled={hasVoted || isVoting}
-          className="vote-button-sim flex-1 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="vote-button flex-1 disabled:opacity-50 disabled:cursor-not-allowed"
           whileHover={!hasVoted && !isVoting ? { scale: 1.05 } : {}}
           whileTap={!hasVoted && !isVoting ? { scale: 0.95 } : {}}
           transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -155,13 +165,13 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false }: PalpiteC
               Votando...
             </motion.span>
           ) : (
-            question.option_a
+            'Votar SIM'
           )}
         </motion.button>
         <motion.button
           onClick={() => handleVote('option_b')}
           disabled={hasVoted || isVoting}
-          className="vote-button-nao flex-1 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="vote-button flex-1 disabled:opacity-50 disabled:cursor-not-allowed"
           whileHover={!hasVoted && !isVoting ? { scale: 1.05 } : {}}
           whileTap={!hasVoted && !isVoting ? { scale: 0.95 } : {}}
           transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -175,7 +185,7 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false }: PalpiteC
               Votando...
             </motion.span>
           ) : (
-            question.option_b
+            'Votar NÃO'
           )}
         </motion.button>
       </div>
