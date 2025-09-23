@@ -4,14 +4,16 @@ import { getCategoryIcon, getCategoryName } from "../data/palpiteData";
 
 interface PalpiteLayoutProps {
   children: ReactNode;
+  onCategoryChange?: (category: Category) => void;
 }
 
 type Category = 'todos' | 'futebol' | 'politica' | 'celebridades' | 'televisao';
 
-export const PalpiteLayout = ({ children }: PalpiteLayoutProps) => {
+export const PalpiteLayout = ({ children, onCategoryChange }: PalpiteLayoutProps) => {
   const [activeCategory, setActiveCategory] = useState<Category>('todos');
 
   const categories: { key: Category; label: string; icon?: string }[] = [
+    { key: 'todos', label: 'Todos', icon: '🌟' },
     { key: 'futebol', label: getCategoryName('futebol'), icon: getCategoryIcon('futebol') },
     { key: 'politica', label: getCategoryName('politica'), icon: getCategoryIcon('politica') },
     { key: 'celebridades', label: getCategoryName('celebridades'), icon: getCategoryIcon('celebridades') },
@@ -65,7 +67,10 @@ export const PalpiteLayout = ({ children }: PalpiteLayoutProps) => {
             {categories.map((category) => (
               <button
                 key={category.key}
-                onClick={() => setActiveCategory(category.key)}
+                onClick={() => {
+                  setActiveCategory(category.key);
+                  onCategoryChange?.(category.key);
+                }}
                 className={`
                   px-4 py-2 rounded-lg whitespace-nowrap flex items-center space-x-2 transition-all
                   ${activeCategory === category.key 

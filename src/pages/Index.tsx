@@ -1,10 +1,18 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
 import { PalpiteLayout } from "../components/PalpiteLayout";
 import { PalpiteCard } from "../components/PalpiteCard";
 import { useQuestions } from "../hooks/useQuestions";
 
+type Category = 'todos' | 'futebol' | 'politica' | 'celebridades' | 'televisao';
+
 const Index = () => {
   const { questions, loading, error, submitVote, hasUserVoted } = useQuestions();
+  const [selectedCategory, setSelectedCategory] = useState<Category>('todos');
+
+  const filteredQuestions = selectedCategory === 'todos' 
+    ? questions 
+    : questions.filter(question => question.category.toLowerCase() === selectedCategory);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -29,7 +37,7 @@ const Index = () => {
 
   if (loading) {
     return (
-      <PalpiteLayout>
+      <PalpiteLayout onCategoryChange={setSelectedCategory}>
         <div className="flex items-center justify-center min-h-[200px]">
           <div className="text-muted-foreground">Carregando perguntas...</div>
         </div>
@@ -39,7 +47,7 @@ const Index = () => {
 
   if (error) {
     return (
-      <PalpiteLayout>
+      <PalpiteLayout onCategoryChange={setSelectedCategory}>
         <div className="flex items-center justify-center min-h-[200px]">
           <div className="text-red-500">Erro ao carregar perguntas. Tente recarregar a página.</div>
         </div>
@@ -47,25 +55,27 @@ const Index = () => {
     );
   }
 
-  if (questions.length === 0) {
+  if (filteredQuestions.length === 0 && !loading) {
     return (
-      <PalpiteLayout>
+      <PalpiteLayout onCategoryChange={setSelectedCategory}>
         <div className="flex items-center justify-center min-h-[200px]">
-          <div className="text-muted-foreground">Nenhuma pergunta encontrada.</div>
+          <div className="text-muted-foreground">
+            {questions.length === 0 ? "Nenhuma pergunta encontrada." : "Nenhuma pergunta nesta categoria."}
+          </div>
         </div>
       </PalpiteLayout>
     );
   }
 
   return (
-    <PalpiteLayout>
+    <PalpiteLayout onCategoryChange={setSelectedCategory}>
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
         className="contents"
       >
-        {questions.map((question) => (
+        {filteredQuestions.map((question) => (
           <motion.div key={question.id} variants={itemVariants}>
             <PalpiteCard 
               question={question} 
