@@ -48,20 +48,20 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        "vote-option-a": {
-          DEFAULT: "hsl(var(--vote-option-a))",
-          foreground: "hsl(var(--vote-option-a-foreground))",
-          glow: "hsl(var(--vote-option-a-glow))",
+        "vote-sim": {
+          DEFAULT: "hsl(var(--vote-sim))",
+          foreground: "hsl(var(--vote-sim-foreground))",
+          glow: "hsl(var(--vote-sim-glow))",
         },
-        "vote-option-b": {
-          DEFAULT: "hsl(var(--vote-option-b))",
-          foreground: "hsl(var(--vote-option-b-foreground))",
-          glow: "hsl(var(--vote-option-b-glow))",
+        "vote-nao": {
+          DEFAULT: "hsl(var(--vote-nao))",
+          foreground: "hsl(var(--vote-nao-foreground))",
+          glow: "hsl(var(--vote-nao-glow))",
         },
-        success: {
-          DEFAULT: "hsl(var(--success))",
-          foreground: "hsl(var(--success-foreground))",
-        },
+        "category-futebol": "hsl(var(--category-futebol))",
+        "category-politica": "hsl(var(--category-politica))",
+        "category-celebridades": "hsl(var(--category-celebridades))",
+        "category-televisao": "hsl(var(--category-televisao))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
