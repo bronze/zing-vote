@@ -98,7 +98,7 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false }: PalpiteC
           <div className="flex justify-between items-center text-xs">
             <div className="text-left">
               <span className={`font-semibold ${userVote === 'option_a' ? 'text-vote-sim' : 'text-muted-foreground'}`}>
-                {question.option_a} • {percentageA.toFixed(0)}%
+                <em>{question.option_a}</em> • {percentageA.toFixed(0)}%
               </span>
               <br />
               <span className="text-muted-foreground">
@@ -107,7 +107,7 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false }: PalpiteC
             </div>
             <div className="text-right">
               <span className={`font-semibold ${userVote === 'option_b' ? 'text-vote-nao' : 'text-muted-foreground'}`}>
-                 {percentageB.toFixed(0)}% • {question.option_b}
+                 {percentageB.toFixed(0)}% • <em>{question.option_b}</em>
               </span>
               <br />
               <span className="text-muted-foreground">
@@ -133,12 +133,12 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false }: PalpiteC
           {/* Vote counts and percentages */}
           <div className="flex justify-between items-center text-xs text-muted-foreground">
             <div className="text-left">
-              <span>SIM • {percentageA.toFixed(0)}%</span>
+              <span>{question.option_a} • {percentageA.toFixed(0)}%</span>
               <br />
               <span>{currentVotes.votesA.toLocaleString()} votos</span>
             </div>
             <div className="text-right">
-              <span>NÃO • {percentageB.toFixed(0)}%</span>
+              <span>{question.option_b} • {percentageB.toFixed(0)}%</span>
               <br />
               <span>{currentVotes.votesB.toLocaleString()} votos</span>
             </div>
