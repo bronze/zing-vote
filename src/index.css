@@ -136,7 +136,7 @@
     background-color: #102325;
   }
   .result-bar {
-    @apply h-4 rounded-full bg-palpite-yes flex items-center justify-end px-2;
+    @apply h-4 rounded-full flex items-center justify-end px-2;
   }
 
   .result-bar-sim {
