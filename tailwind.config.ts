@@ -22,6 +22,7 @@ export default {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          glow: "hsl(var(--primary-glow))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -46,6 +47,20 @@ export default {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+        },
+        "vote-option-a": {
+          DEFAULT: "hsl(var(--vote-option-a))",
+          foreground: "hsl(var(--vote-option-a-foreground))",
+          glow: "hsl(var(--vote-option-a-glow))",
+        },
+        "vote-option-b": {
+          DEFAULT: "hsl(var(--vote-option-b))",
+          foreground: "hsl(var(--vote-option-b-foreground))",
+          glow: "hsl(var(--vote-option-b-glow))",
+        },
+        success: {
+          DEFAULT: "hsl(var(--success))",
+          foreground: "hsl(var(--success-foreground))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",

@@ -2,41 +2,80 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Design system for addictive voting platform with vibrant colors and smooth animations */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core brand colors */
+    --background: 248 100% 97%;
+    --foreground: 263 25% 15%;
 
+    /* Card system */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 263 25% 15%;
+    --card-hover: 248 100% 99%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    /* Interactive elements */
+    --primary: 280 100% 65%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 280 100% 75%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Voting options */
+    --vote-option-a: 340 100% 65%;
+    --vote-option-a-foreground: 0 0% 100%;
+    --vote-option-a-glow: 340 100% 75%;
+    
+    --vote-option-b: 210 100% 65%;
+    --vote-option-b-foreground: 0 0% 100%;
+    --vote-option-b-glow: 210 100% 75%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary colors */
+    --secondary: 248 100% 95%;
+    --secondary-foreground: 263 25% 25%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 248 50% 92%;
+    --muted-foreground: 263 15% 55%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 45 100% 70%;
+    --accent-foreground: 263 25% 15%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Status colors */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --success: 120 100% 40%;
+    --success-foreground: 0 0% 100%;
 
-    --radius: 0.5rem;
+    /* UI elements */
+    --border: 248 50% 88%;
+    --input: 248 50% 92%;
+    --ring: 280 100% 65%;
+
+    --radius: 1rem;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-option-a: linear-gradient(135deg, hsl(var(--vote-option-a)), hsl(var(--vote-option-a-glow)));
+    --gradient-option-b: linear-gradient(135deg, hsl(var(--vote-option-b)), hsl(var(--vote-option-b-glow)));
+    --gradient-background: linear-gradient(135deg, hsl(var(--background)), hsl(var(--secondary)));
+
+    /* Shadows and effects */
+    --shadow-card: 0 4px 20px hsl(var(--primary) / 0.1);
+    --shadow-card-hover: 0 8px 30px hsl(var(--primary) / 0.15);
+    --shadow-vote-glow: 0 0 20px hsl(var(--primary) / 0.3);
+
+    /* Animation timings */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +139,84 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-gradient-to-br from-background via-secondary to-background text-foreground min-h-screen;
+  }
+}
+
+@layer components {
+  /* Voting card animations */
+  .vote-card {
+    @apply transition-all duration-300 hover:shadow-lg hover:scale-[1.02] hover:-translate-y-1;
+  }
+
+  .vote-button {
+    @apply transition-all duration-300 transform hover:scale-105 active:scale-95;
+  }
+
+  .vote-button-a {
+    @apply bg-gradient-to-r from-vote-option-a to-vote-option-a-glow text-vote-option-a-foreground;
+    box-shadow: var(--shadow-vote-glow);
+  }
+
+  .vote-button-b {
+    @apply bg-gradient-to-r from-vote-option-b to-vote-option-b-glow text-vote-option-b-foreground;
+    box-shadow: var(--shadow-vote-glow);
+  }
+
+  .result-bar-a {
+    @apply bg-gradient-to-r from-vote-option-a/80 to-vote-option-a-glow/80;
+  }
+
+  .result-bar-b {
+    @apply bg-gradient-to-r from-vote-option-b/80 to-vote-option-b-glow/80;
+  }
+
+  /* Pulse animation for engagement */
+  .pulse-glow {
+    animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.02);
+    }
+  }
+
+  /* Vote success animation */
+  .vote-success {
+    animation: vote-success 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  @keyframes vote-success {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  /* Result bar animation */
+  .result-animate {
+    animation: result-fill 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  @keyframes result-fill {
+    0% {
+      width: 0%;
+      opacity: 0;
+    }
+    100% {
+      width: var(--result-width);
+      opacity: 1;
+    }
   }
 }
