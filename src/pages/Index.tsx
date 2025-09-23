@@ -63,7 +63,7 @@ const Index = () => {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="space-y-4"
+        
       >
         {questions.map((question) => (
           <motion.div key={question.id} variants={itemVariants}>
