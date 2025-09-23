@@ -14,7 +14,100 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      questions: {
+        Row: {
+          category: string
+          created_at: string
+          emoji: string | null
+          id: string
+          is_open: boolean | null
+          option_a: string
+          option_b: string
+          profile_image: string | null
+          question_text: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          emoji?: string | null
+          id?: string
+          is_open?: boolean | null
+          option_a: string
+          option_b: string
+          profile_image?: string | null
+          question_text: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          emoji?: string | null
+          id?: string
+          is_open?: boolean | null
+          option_a?: string
+          option_b?: string
+          profile_image?: string | null
+          question_text?: string
+        }
+        Relationships: []
+      }
+      vote_log: {
+        Row: {
+          created_at: string
+          id: string
+          option: string
+          question_id: string
+          session_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          option: string
+          question_id: string
+          session_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          option?: string
+          question_id?: string
+          session_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "vote_log_question_id_fkey"
+            columns: ["question_id"]
+            isOneToOne: false
+            referencedRelation: "questions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      vote_totals: {
+        Row: {
+          count: number
+          option: string
+          question_id: string
+        }
+        Insert: {
+          count?: number
+          option: string
+          question_id: string
+        }
+        Update: {
+          count?: number
+          option?: string
+          question_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "vote_totals_question_id_fkey"
+            columns: ["question_id"]
+            isOneToOne: false
+            referencedRelation: "questions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
