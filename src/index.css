@@ -132,6 +132,8 @@
   .result-container {
     @apply flex h-5 rounded-lg overflow-hidden mb-3;
     background-color: hsl(var(--vote-track-bg));
+    @apply flex items-center gap-1 p-2 rounded-full;
+    background-color: #102325;
   }
 
   .result-bar-sim {
