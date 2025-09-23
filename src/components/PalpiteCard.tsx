@@ -1,48 +1,65 @@
 import { useState } from "react";
-import { PalpiteQuestion, getCategoryIcon, getCategoryName } from "../data/palpiteData";
+import { motion, AnimatePresence } from "framer-motion";
+import { getCategoryIcon, getCategoryName } from "../data/palpiteData";
+import { Question } from "../hooks/useQuestions";
 
 interface PalpiteCardProps {
-  question: PalpiteQuestion;
-  onVote?: (questionId: string, vote: 'sim' | 'nao') => void;
+  question: Question;
+  onVote?: (questionId: string, option: 'option_a' | 'option_b') => Promise<boolean>;
+  hasUserVoted?: boolean;
 }
 
-export const PalpiteCard = ({ question, onVote }: PalpiteCardProps) => {
-  const [hasVoted, setHasVoted] = useState(false);
-  const [userVote, setUserVote] = useState<'sim' | 'nao' | null>(null);
+export const PalpiteCard = ({ question, onVote, hasUserVoted = false }: PalpiteCardProps) => {
+  const [isVoting, setIsVoting] = useState(false);
+  const [hasVoted, setHasVoted] = useState(hasUserVoted);
+  const [userVote, setUserVote] = useState<'option_a' | 'option_b' | null>(null);
   const [currentVotes, setCurrentVotes] = useState({
-    votesA: question.votesA,
-    votesB: question.votesB
+    votesA: question.votes_a,
+    votesB: question.votes_b
   });
 
   const totalVotes = currentVotes.votesA + currentVotes.votesB;
   const percentageA = totalVotes > 0 ? (currentVotes.votesA / totalVotes) * 100 : 50;
   const percentageB = totalVotes > 0 ? (currentVotes.votesB / totalVotes) * 100 : 50;
 
-  const handleVote = (vote: 'sim' | 'nao') => {
-    if (hasVoted) return;
+  const handleVote = async (option: 'option_a' | 'option_b') => {
+    if (hasVoted || isVoting) return;
 
-    setUserVote(vote);
-    setHasVoted(true);
+    setIsVoting(true);
     
-    // Update vote counts
-    setCurrentVotes(prev => ({
-      ...prev,
-      [vote === 'sim' ? 'votesA' : 'votesB']: prev[vote === 'sim' ? 'votesA' : 'votesB'] + 1
-    }));
-
-    onVote?.(question.id, vote);
+    try {
+      const success = await onVote?.(question.id, option);
+      
+      if (success) {
+        setUserVote(option);
+        setHasVoted(true);
+        
+        // Update local vote counts optimistically
+        setCurrentVotes(prev => ({
+          ...prev,
+          votesA: option === 'option_a' ? prev.votesA + 1 : prev.votesA,
+          votesB: option === 'option_b' ? prev.votesB + 1 : prev.votesB
+        }));
+      }
+    } catch (error) {
+      console.error('Error voting:', error);
+    } finally {
+      setIsVoting(false);
+    }
   };
 
   return (
-    <div className="palpite-card p-4 space-y-4">
+    <div 
+      className="palpite-card p-4 space-y-4"
+    >
       {/* Header with category and status */}
       <div className="flex items-center justify-between">
         <div className={`category-badge category-${question.category}`}>
-          <span>{getCategoryIcon(question.category)}</span>
-          <span>{getCategoryName(question.category)}</span>
+          <span>{getCategoryIcon(question.category as any)}</span>
+          <span>{getCategoryName(question.category as any)}</span>
         </div>
         
-        {question.isOpen && (
+        {question.is_open && (
           <div className="status-aberto">
             <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
             <span>Em aberto</span>
@@ -53,12 +70,12 @@ export const PalpiteCard = ({ question, onVote }: PalpiteCardProps) => {
       {/* Question with profile image */}
       <div className="flex items-start gap-3">
         <img 
-          src={question.profileImage} 
+          src={question.profile_image || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face'} 
           alt="Profile" 
           className="w-10 h-10 rounded-full object-cover"
         />
         <h3 className="text-sm font-medium text-foreground leading-relaxed flex-1">
-          {question.question}
+          {question.question_text}
         </h3>
       </div>
 
@@ -80,8 +97,8 @@ export const PalpiteCard = ({ question, onVote }: PalpiteCardProps) => {
           {/* Vote counts */}
           <div className="flex justify-between text-xs">
             <div className="flex items-center gap-2">
-              <span className={`font-semibold ${userVote === 'sim' ? 'text-green-400' : 'text-muted-foreground'}`}>
-                SIM • {percentageA.toFixed(0)}%
+              <span className={`font-semibold ${userVote === 'option_a' ? 'text-green-400' : 'text-muted-foreground'}`}>
+                {question.option_a} • {percentageA.toFixed(0)}%
               </span>
               <span className="text-muted-foreground">
                 {currentVotes.votesA.toLocaleString()} votos
@@ -91,8 +108,8 @@ export const PalpiteCard = ({ question, onVote }: PalpiteCardProps) => {
               <span className="text-muted-foreground">
                 {currentVotes.votesB.toLocaleString()} votos
               </span>
-              <span className={`font-semibold ${userVote === 'nao' ? 'text-red-400' : 'text-muted-foreground'}`}>
-                {percentageB.toFixed(0)}% • NÃO
+              <span className={`font-semibold ${userVote === 'option_b' ? 'text-red-400' : 'text-muted-foreground'}`}>
+                {percentageB.toFixed(0)}% • {question.option_b}
               </span>
             </div>
           </div>
@@ -113,28 +130,54 @@ export const PalpiteCard = ({ question, onVote }: PalpiteCardProps) => {
 
           {/* Vote counts */}
           <div className="flex justify-between text-xs text-muted-foreground">
-            <span>SIM • {percentageA.toFixed(0)}% • {currentVotes.votesA.toLocaleString()} votos</span>
-            <span>{currentVotes.votesB.toLocaleString()} votos • {percentageB.toFixed(0)}% • NÃO</span>
+            <span>{question.option_a} • {percentageA.toFixed(0)}% • {currentVotes.votesA.toLocaleString()} votos</span>
+            <span>{currentVotes.votesB.toLocaleString()} votos • {percentageB.toFixed(0)}% • {question.option_b}</span>
           </div>
         </div>
       )}
 
       {/* Vote buttons */}
       <div className="flex gap-2 pt-2">
-        <button
-          onClick={() => handleVote('sim')}
-          disabled={hasVoted}
+        <motion.button
+          onClick={() => handleVote('option_a')}
+          disabled={hasVoted || isVoting}
           className="vote-button-sim flex-1 disabled:opacity-50 disabled:cursor-not-allowed"
+          whileHover={!hasVoted && !isVoting ? { scale: 1.05 } : {}}
+          whileTap={!hasVoted && !isVoting ? { scale: 0.95 } : {}}
+          transition={{ type: "spring", stiffness: 400, damping: 17 }}
         >
-          Votar SIM
-        </button>
-        <button
-          onClick={() => handleVote('nao')}
-          disabled={hasVoted}
+          {isVoting ? (
+            <motion.span
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              Votando...
+            </motion.span>
+          ) : (
+            question.option_a
+          )}
+        </motion.button>
+        <motion.button
+          onClick={() => handleVote('option_b')}
+          disabled={hasVoted || isVoting}
           className="vote-button-nao flex-1 disabled:opacity-50 disabled:cursor-not-allowed"
+          whileHover={!hasVoted && !isVoting ? { scale: 1.05 } : {}}
+          whileTap={!hasVoted && !isVoting ? { scale: 0.95 } : {}}
+          transition={{ type: "spring", stiffness: 400, damping: 17 }}
         >
-          Votar NÃO
-        </button>
+          {isVoting ? (
+            <motion.span
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              Votando...
+            </motion.span>
+          ) : (
+            question.option_b
+          )}
+        </motion.button>
       </div>
     </div>
   );
