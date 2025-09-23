@@ -76,7 +76,7 @@
   }
 
   body {
-    /* @apply bg-background text-foreground min-h-screen; */
+    @apply bg-background text-foreground min-h-screen;
 
     /* @apply bg-gradient-to-b from-palpite-teal via-palpite-teal to-palpite-dark text-palpite-text font-sans; */
     background: radial-gradient(83.86% 47.1% at 49.87% -20.31%, #2BB6C2 0%, #012F33 100%);
