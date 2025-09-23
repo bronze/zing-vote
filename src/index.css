@@ -135,6 +135,9 @@
     @apply flex items-center gap-1 p-2 rounded-full;
     background-color: #102325;
   }
+  .result-bar {
+    @apply h-4 rounded-full bg-palpite-yes flex items-center justify-end px-2;
+  }
 
   .result-bar-sim {
     background-color: hsl(var(--vote-sim));
