@@ -41,7 +41,7 @@
   color: #888;
 }
 
-main .sobre {
+.sobre {
   a {
     @apply font-semibold;
     color: hsl(var(--vote-sim));
