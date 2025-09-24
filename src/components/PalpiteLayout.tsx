@@ -1,8 +1,8 @@
-import { ReactNode, useState } from "react";
-import { Search } from "lucide-react";
+import { ReactNode, useState, useRef, useEffect } from "react";
+import { Search, X } from "lucide-react";
 import { getCategoryIcon, getCategoryName } from "../data/palpiteData";
 import palpiteLogo from "../assets/palpite-logo.svg";
-import { SearchSidebar } from "./SearchSidebar";
+import { Input } from "./ui/input";
 import { useIsMobile } from "../hooks/use-mobile";
 
 interface PalpiteLayoutProps {
@@ -21,8 +21,24 @@ export const PalpiteLayout = ({
   onSearchChange 
 }: PalpiteLayoutProps) => {
   const [activeCategory, setActiveCategory] = useState<Category>('todos');
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [showSearchInput, setShowSearchInput] = useState(false);
   const isMobile = useIsMobile();
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (showSearchInput && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [showSearchInput]);
+
+  const handleSearchToggle = () => {
+    if (showSearchInput) {
+      setShowSearchInput(false);
+      onSearchChange('');
+    } else {
+      setShowSearchInput(true);
+    }
+  };
 
   const categories: { key: Category; label: string; icon?: string }[] = [
     { key: 'todos', label: 'Todos', icon: '🌟' },
@@ -59,13 +75,38 @@ export const PalpiteLayout = ({
             </div>
 
             {/* Search */}
-            <div className="flex items-center space-x-4">
-              <button 
-                onClick={() => setIsSearchOpen(true)}
-                className="p-2 hover:bg-secondary rounded-lg transition-colors"
-              >
-                <Search className="w-5 h-5 text-muted-foreground" />
-              </button>
+            <div className="flex items-center gap-2">
+              {showSearchInput ? (
+                <div className="flex items-center gap-2 animate-fade-in">
+                  <div className="relative">
+                    <Input
+                      ref={inputRef}
+                      type="text"
+                      placeholder="Digite para buscar..."
+                      value={searchTerm}
+                      onChange={(e) => onSearchChange(e.target.value)}
+                      className={`
+                        bg-voteTrack border-0 text-white placeholder:text-gray-400 
+                        focus:ring-2 focus:ring-primary transition-all duration-300 ease-in-out
+                        ${isMobile ? 'w-48' : 'w-72'}
+                      `}
+                    />
+                  </div>
+                  <button
+                    onClick={handleSearchToggle}
+                    className="p-2 hover:bg-secondary rounded-lg transition-colors"
+                  >
+                    <X className="w-4 h-4 text-muted-foreground hover:text-foreground" />
+                  </button>
+                </div>
+              ) : (
+                <button 
+                  onClick={handleSearchToggle}
+                  className="p-2 hover:bg-secondary rounded-lg transition-colors"
+                >
+                  <Search className="w-5 h-5 text-muted-foreground hover:text-foreground" />
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -104,15 +145,6 @@ export const PalpiteLayout = ({
           {children}
         </div>
       </main>
-
-      {/* Search Sidebar */}
-      <SearchSidebar
-        isOpen={isSearchOpen}
-        onClose={() => setIsSearchOpen(false)}
-        searchTerm={searchTerm}
-        onSearchChange={onSearchChange}
-        isMobile={isMobile}
-      />
 
       {/* Footer */}
       <footer className="mt-12 py-8 text-center border-t border-border">
