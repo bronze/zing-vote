@@ -61,7 +61,7 @@ export const PalpiteLayout = ({ children, onCategoryChange }: PalpiteLayoutProps
       </header>
 
       {/* Category Navigation */}
-      <nav className="sticky top-[68px] z-40 bg-background/95 backdrop-blur-sm">
+      <nav className="sticky top-[68px] z-40 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 py-3">
           <div className="flex space-x-1 overflow-x-auto scrollbar-hide">
             {categories.map((category) => (
