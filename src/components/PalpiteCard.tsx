@@ -23,7 +23,7 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false }: PalpiteC
   const percentageB = totalVotes > 0 ? (currentVotes.votesB / totalVotes) * 100 : 50;
 
   const handleVote = async (option: 'option_a' | 'option_b') => {
-    if (hasVoted || isVoting) return;
+    if (hasVoted || isVoting || !question.is_open) return;
 
     setIsVoting(true);
     
@@ -63,6 +63,13 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false }: PalpiteC
           <div className="status-aberto">
             <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
             <span>Em aberto</span>
+          </div>
+        )}
+        
+        {!question.is_open && (
+          <div className="status-encerrada">
+            <div className="w-1.5 h-1.5 bg-red-500 rounded-full"></div>
+            <span>Encerrada</span>
           </div>
         )}
       </div>
@@ -150,10 +157,10 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false }: PalpiteC
       <div className="flex gap-2 pt-2">
         <motion.button
           onClick={() => handleVote('option_a')}
-          disabled={hasVoted || isVoting}
+          disabled={hasVoted || isVoting || !question.is_open}
           className="vote-button flex-1 disabled:opacity-50 disabled:cursor-not-allowed"
-          whileHover={!hasVoted && !isVoting ? { scale: 1.05 } : {}}
-          whileTap={!hasVoted && !isVoting ? { scale: 0.95 } : {}}
+          whileHover={!hasVoted && !isVoting && question.is_open ? { scale: 1.05 } : {}}
+          whileTap={!hasVoted && !isVoting && question.is_open ? { scale: 0.95 } : {}}
           transition={{ type: "spring", stiffness: 400, damping: 17 }}
         >
           {isVoting ? (
@@ -170,10 +177,10 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false }: PalpiteC
         </motion.button>
         <motion.button
           onClick={() => handleVote('option_b')}
-          disabled={hasVoted || isVoting}
+          disabled={hasVoted || isVoting || !question.is_open}
           className="vote-button flex-1 disabled:opacity-50 disabled:cursor-not-allowed"
-          whileHover={!hasVoted && !isVoting ? { scale: 1.05 } : {}}
-          whileTap={!hasVoted && !isVoting ? { scale: 0.95 } : {}}
+          whileHover={!hasVoted && !isVoting && question.is_open ? { scale: 1.05 } : {}}
+          whileTap={!hasVoted && !isVoting && question.is_open ? { scale: 0.95 } : {}}
           transition={{ type: "spring", stiffness: 400, damping: 17 }}
         >
           {isVoting ? (
