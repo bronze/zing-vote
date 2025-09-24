@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { PalpiteLayout } from "../components/PalpiteLayout";
 import { PalpiteCard } from "../components/PalpiteCard";
 import { useQuestions } from "../hooks/useQuestions";
@@ -9,10 +9,27 @@ type Category = 'todos' | 'futebol' | 'politica' | 'celebridades' | 'televisao';
 const Index = () => {
   const { questions, loading, error, submitVote, hasUserVoted } = useQuestions();
   const [selectedCategory, setSelectedCategory] = useState<Category>('todos');
+  const [searchTerm, setSearchTerm] = useState('');
 
-  const filteredQuestions = selectedCategory === 'todos' 
-    ? questions 
-    : questions.filter(question => question.category.toLowerCase() === selectedCategory);
+  const filteredQuestions = useMemo(() => {
+    let filtered = questions;
+    
+    // Filter by category
+    if (selectedCategory !== 'todos') {
+      filtered = filtered.filter(question => 
+        question.category.toLowerCase() === selectedCategory
+      );
+    }
+    
+    // Filter by search term
+    if (searchTerm.trim()) {
+      filtered = filtered.filter(question =>
+        question.question_text.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+    
+    return filtered;
+  }, [questions, selectedCategory, searchTerm]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -35,9 +52,26 @@ const Index = () => {
     }
   };
 
+  const getEmptyMessage = () => {
+    if (questions.length === 0) {
+      return "Nenhuma pergunta encontrada.";
+    }
+    if (searchTerm.trim() && selectedCategory !== 'todos') {
+      return `Nenhuma pergunta encontrada para "${searchTerm}" na categoria selecionada.`;
+    }
+    if (searchTerm.trim()) {
+      return `Nenhuma pergunta encontrada para "${searchTerm}".`;
+    }
+    return "Nenhuma pergunta nesta categoria.";
+  };
+
   if (loading) {
     return (
-      <PalpiteLayout onCategoryChange={setSelectedCategory}>
+      <PalpiteLayout 
+        onCategoryChange={setSelectedCategory}
+        searchTerm={searchTerm}
+        onSearchChange={setSearchTerm}
+      >
         <div className="flex items-center justify-center min-h-[200px]">
           <div className="text-muted-foreground">Carregando perguntas...</div>
         </div>
@@ -47,7 +81,11 @@ const Index = () => {
 
   if (error) {
     return (
-      <PalpiteLayout onCategoryChange={setSelectedCategory}>
+      <PalpiteLayout 
+        onCategoryChange={setSelectedCategory}
+        searchTerm={searchTerm}
+        onSearchChange={setSearchTerm}
+      >
         <div className="flex items-center justify-center min-h-[200px]">
           <div className="text-red-500">Erro ao carregar perguntas. Tente recarregar a página.</div>
         </div>
@@ -57,10 +95,14 @@ const Index = () => {
 
   if (filteredQuestions.length === 0 && !loading) {
     return (
-      <PalpiteLayout onCategoryChange={setSelectedCategory}>
+      <PalpiteLayout 
+        onCategoryChange={setSelectedCategory}
+        searchTerm={searchTerm}
+        onSearchChange={setSearchTerm}
+      >
         <div className="flex items-center justify-center min-h-[200px]">
           <div className="text-muted-foreground">
-            {questions.length === 0 ? "Nenhuma pergunta encontrada." : "Nenhuma pergunta nesta categoria."}
+            {getEmptyMessage()}
           </div>
         </div>
       </PalpiteLayout>
@@ -68,7 +110,11 @@ const Index = () => {
   }
 
   return (
-    <PalpiteLayout onCategoryChange={setSelectedCategory}>
+    <PalpiteLayout 
+      onCategoryChange={setSelectedCategory}
+      searchTerm={searchTerm}
+      onSearchChange={setSearchTerm}
+    >
       <motion.div
         variants={containerVariants}
         initial="hidden"

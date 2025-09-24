@@ -1,17 +1,28 @@
 import { ReactNode, useState } from "react";
-import { Bell, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import { getCategoryIcon, getCategoryName } from "../data/palpiteData";
 import palpiteLogo from "../assets/palpite-logo.svg";
+import { SearchSidebar } from "./SearchSidebar";
+import { useIsMobile } from "../hooks/use-mobile";
 
 interface PalpiteLayoutProps {
   children: ReactNode;
   onCategoryChange?: (category: Category) => void;
+  searchTerm: string;
+  onSearchChange: (term: string) => void;
 }
 
 type Category = 'todos' | 'futebol' | 'politica' | 'celebridades' | 'televisao';
 
-export const PalpiteLayout = ({ children, onCategoryChange }: PalpiteLayoutProps) => {
+export const PalpiteLayout = ({ 
+  children, 
+  onCategoryChange, 
+  searchTerm, 
+  onSearchChange 
+}: PalpiteLayoutProps) => {
   const [activeCategory, setActiveCategory] = useState<Category>('todos');
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const isMobile = useIsMobile();
 
   const categories: { key: Category; label: string; icon?: string }[] = [
     { key: 'todos', label: 'Todos', icon: '🌟' },
@@ -47,14 +58,14 @@ export const PalpiteLayout = ({ children, onCategoryChange }: PalpiteLayoutProps
               <img src={palpiteLogo} alt="Palpite" className="h-8" />
             </div>
 
-            {/* Search and notifications */}
+            {/* Search */}
             <div className="flex items-center space-x-4">
-              <button className="p-2 hover:bg-secondary rounded-lg transition-colors">
+              <button 
+                onClick={() => setIsSearchOpen(true)}
+                className="p-2 hover:bg-secondary rounded-lg transition-colors"
+              >
                 <Search className="w-5 h-5 text-muted-foreground" />
               </button>
-              {/* <button className="p-2 hover:bg-secondary rounded-lg transition-colors">
-                <Bell className="w-5 h-5 text-muted-foreground" />
-              </button> */}
             </div>
           </div>
         </div>
@@ -93,6 +104,15 @@ export const PalpiteLayout = ({ children, onCategoryChange }: PalpiteLayoutProps
           {children}
         </div>
       </main>
+
+      {/* Search Sidebar */}
+      <SearchSidebar
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+        searchTerm={searchTerm}
+        onSearchChange={onSearchChange}
+        isMobile={isMobile}
+      />
 
       {/* Footer */}
       <footer className="mt-12 py-8 text-center border-t border-border">
