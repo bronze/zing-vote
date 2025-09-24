@@ -128,7 +128,7 @@ export const PalpiteLayout = ({
                   px-4 py-2 rounded-lg whitespace-nowrap flex items-center space-x-2 transition-all
                   ${activeCategory === category.key 
                     ? getCategoryActiveClass(category.key)
-                    : 'text-muted-foreground hover:text-foreground hover:bg-secondary'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-secondary/30'
                   }
                 `}
               >
