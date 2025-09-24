@@ -43,6 +43,7 @@
 
 main.sobre {
   a {
+    @apply font-semibold;
     color: hsl(var(--vote-sim));
   }
 }
