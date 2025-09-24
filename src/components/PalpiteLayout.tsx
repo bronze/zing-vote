@@ -1,6 +1,7 @@
 import { ReactNode, useState } from "react";
-import { Heart, Bell, Search } from "lucide-react";
+import { Bell, Search } from "lucide-react";
 import { getCategoryIcon, getCategoryName } from "../data/palpiteData";
+import palpiteLogo from "../assets/palpite-logo.svg";
 
 interface PalpiteLayoutProps {
   children: ReactNode;
@@ -42,9 +43,8 @@ export const PalpiteLayout = ({ children, onCategoryChange }: PalpiteLayoutProps
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <div className="flex items-center space-x-2">
-              <Heart className="w-6 h-6 text-primary" />
-              <h1 className="text-xl font-bold text-primary">Palpite</h1>
+            <div className="flex items-center">
+              <img src={palpiteLogo} alt="Palpite" className="h-8" />
             </div>
 
             {/* Search and notifications */}
