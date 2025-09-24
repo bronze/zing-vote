@@ -28,7 +28,7 @@ const Sobre = () => {
           
           <div className="bg-card/30 backdrop-blur-sm rounded-2xl p-8 md:p-12">
             <p className="text-lg md:text-xl text-white/90 leading-relaxed">
-              Somos um time de estudantes de MBA da Tera, unidos pela paixão por inovação e pelo potencial da inteligência coletiva. Com o objetivo de transformar ideias em soluções tangíveis, estamos empolgados em apresentar e testar nosso primeiro produto, um MVP (Produto Mínimo Viável). Este projeto é mais do que apenas um teste de mercado; é uma oportunidade de aprendizado para nós. Cada interação, feedback e resultado nos ajuda a entender melhor as necessidades do nosso público e a refinar nossa visão, permitindo-nos construir algo verdadeiramente valioso e significativo. Agradecemos por fazer parte desta jornada de crescimento e co-criação.
+              Somos um time de estudantes de <a href="https://somostera.com/mba-lideranca-estrategia-produtos-digitais">MBA</a> da <a href="https://somostera.com/">Tera</a>, unidos pela paixão por inovação e pelo potencial da inteligência coletiva. Com o objetivo de transformar ideias em soluções tangíveis, estamos empolgados em apresentar e testar nosso primeiro produto, um MVP (Produto Mínimo Viável). Este projeto é mais do que apenas um teste de mercado; é uma oportunidade de aprendizado para nós. Cada interação, feedback e resultado nos ajuda a entender melhor as necessidades do nosso público e a refinar nossa visão, permitindo-nos construir algo verdadeiramente valioso e significativo. Agradecemos por fazer parte desta jornada de crescimento e co-criação.
             </p>
             
             {/* Future placeholders - commented for now */}
