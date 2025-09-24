@@ -86,10 +86,11 @@ export const PalpiteLayout = ({
                       value={searchTerm}
                       onChange={(e) => onSearchChange(e.target.value)}
                       className={`
-                        bg-voteTrack border-0 text-white placeholder:text-gray-400 
+                        bg-voteTrack border-0 placeholder:text-gray-400 
                         focus:ring-2 focus:ring-primary transition-all duration-300 ease-in-out
                         ${isMobile ? 'w-48' : 'w-72'}
                       `}
+                      style={{ color: '#0A191A' }}
                     />
                   </div>
                   <button
