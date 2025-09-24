@@ -115,6 +115,9 @@
   .status-aberto {
     @apply bg-green-500/20 text-green-400 px-2 py-1 rounded-md text-xs font-medium flex items-center gap-1;
   }
+  .status-encerrada {
+    @apply bg-red-500/20 text-red-400 px-2 py-1 rounded-md text-xs font-medium flex items-center gap-1;
+  }
 
   /* Vote buttons - both same dark style */
   .vote-button,
