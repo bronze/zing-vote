@@ -52,9 +52,9 @@ export const PalpiteLayout = ({ children, onCategoryChange }: PalpiteLayoutProps
               <button className="p-2 hover:bg-secondary rounded-lg transition-colors">
                 <Search className="w-5 h-5 text-muted-foreground" />
               </button>
-              <button className="p-2 hover:bg-secondary rounded-lg transition-colors">
+              {/* <button className="p-2 hover:bg-secondary rounded-lg transition-colors">
                 <Bell className="w-5 h-5 text-muted-foreground" />
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
