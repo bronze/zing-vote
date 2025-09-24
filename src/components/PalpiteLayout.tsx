@@ -37,7 +37,7 @@ export const PalpiteLayout = ({ children, onCategoryChange }: PalpiteLayoutProps
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen ">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 py-4">
