@@ -4,6 +4,7 @@ import { getCategoryIcon, getCategoryName } from "../data/palpiteData";
 import palpiteLogo from "../assets/palpite-logo.svg";
 import { Input } from "./ui/input";
 import { useIsMobile } from "../hooks/use-mobile";
+import { Link } from "react-router-dom";
 
 interface PalpiteLayoutProps {
   children: ReactNode;
@@ -150,7 +151,13 @@ export const PalpiteLayout = ({
       {/* Footer */}
       <footer className="mt-12 py-8 text-center border-t border-border">
         <p className="text-sm text-muted-foreground">
-          Palpite • Onde as opiniões ganham vida
+          Palpite • Onde as opiniões ganham vida •{" "}
+          <Link 
+            to="/sobre" 
+            className="text-white/70 hover:text-white hover:underline transition-colors ml-1"
+          >
+            Sobre nós
+          </Link>
         </p>
       </footer>
     </div>
