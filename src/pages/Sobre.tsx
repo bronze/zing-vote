@@ -20,7 +20,7 @@ const Sobre = () => {
       </header>
 
       {/* Main content - centered */}
-      <main className="flex-1 flex items-center justify-center px-6 py-8">
+      <main className="sobre flex-1 flex items-center justify-center px-6 py-8">
         <div className="max-w-3xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-8">
             Sobre nós

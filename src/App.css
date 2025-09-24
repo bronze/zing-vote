@@ -40,3 +40,9 @@
 .read-the-docs {
   color: #888;
 }
+
+main.sobre {
+  a {
+    color: hsl(var(--vote-sim));
+  }
+}
