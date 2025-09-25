@@ -51,6 +51,8 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false }: PalpiteC
   return (
     <div 
       className="palpite-card p-4 space-y-4"
+      data-ph-capture-attribute-card={question.question_text}
+      data-ph-capture-attribute-category={question.category}
     >
       {/* Header with category and status */}
       <div className="flex items-center justify-between">
