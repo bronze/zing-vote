@@ -9,7 +9,7 @@ export const FeedLayout = ({ children }: FeedLayoutProps) => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-secondary to-background">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-card/80 backdrop-blur-md border-b border-border">
+      <header className="bg-card/80 backdrop-blur-md border-b border-border">
         <div className="max-w-2xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             {/* Logo */}

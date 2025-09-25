@@ -67,7 +67,7 @@ export const PalpiteLayout = ({
   return (
     <div className="min-h-screen ">
       {/* Header */}
-      <header className="sticky top-0 z-50 backdrop-blur-sm">
+      <header className="backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             {/* Logo */}
@@ -115,7 +115,7 @@ export const PalpiteLayout = ({
       </header>
 
       {/* Category Navigation */}
-      <nav className="sticky top-[68px] z-40 backdrop-blur-sm">
+      <nav className="backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 py-3">
           <div className="flex space-x-1 overflow-x-auto scrollbar-hide">
             {categories.map((category) => (
