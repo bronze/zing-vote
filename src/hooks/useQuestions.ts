@@ -57,7 +57,8 @@ export const useQuestions = () => {
       const { data: questionsData, error: questionsError } = await supabase
         .from('questions')
         .select('*')
-        .order('created_at', { ascending: false });
+        .order('is_open', { ascending: false }) // Open questions first
+        .order('created_at', { ascending: false }); // Then by creation date
 
       if (questionsError) throw questionsError;
 
