@@ -147,7 +147,7 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false }: PalpiteC
               <span>{currentVotes.votesA.toLocaleString()} votos</span>
             </div>
             <div className="text-right">
-              <span><strong>{question.option_b}</strong> • {percentageB.toFixed(0)}%</span>
+              <span>{percentageB.toFixed(0)}% • <strong>{question.option_b}</strong></span>
               <br />
               <span>{currentVotes.votesB.toLocaleString()} votos</span>
             </div>
