@@ -34,6 +34,8 @@
     --vote-track-bg: 186 40% 11%;   /* #102325 */
 
     /* Secondary colors */
+    --nav: 58 36% 84%;
+
     --secondary: 200 15% 20%;
     --secondary-foreground: 180 10% 75%;
 
@@ -123,15 +125,8 @@
   .vote-button,
   .vote-button-a,
   .vote-button-b {
-    @apply text-white font-semibold px-6 py-2 rounded-xl transition-all duration-100 flex items-center gap-2;
+    @apply text-white font-semibold px-6 py-2 rounded-xl transition-all duration-100 hover:brightness-110 hover:scale-105 flex items-center gap-2;
     background-color: hsl(var(--vote-button-bg));
-  }
-
-  /* Hover effects only for enabled buttons */
-  .vote-button:not(:disabled),
-  .vote-button-a:not(:disabled),
-  .vote-button-b:not(:disabled) {
-    @apply hover:brightness-110 hover:scale-105;
   }
 
   .vote-success {
