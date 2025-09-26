@@ -11,6 +11,7 @@ interface PalpiteLayoutProps {
   onCategoryChange?: (category: Category) => void;
   searchTerm: string;
   onSearchChange: (term: string) => void;
+  useGrid?: boolean;
 }
 
 type Category = 'todos' | 'futebol' | 'politica' | 'celebridades' | 'televisao';
@@ -19,7 +20,8 @@ export const PalpiteLayout = ({
   children, 
   onCategoryChange, 
   searchTerm, 
-  onSearchChange 
+  onSearchChange,
+  useGrid = true
 }: PalpiteLayoutProps) => {
   const [activeCategory, setActiveCategory] = useState<Category>('todos');
   const [showSearchInput, setShowSearchInput] = useState(false);
@@ -149,9 +151,13 @@ export const PalpiteLayout = ({
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 py-6">
-        <div className="palpite-grid">
-          {children}
-        </div>
+        {useGrid ? (
+          <div className="palpite-grid">
+            {children}
+          </div>
+        ) : (
+          children
+        )}
       </main>
 
       {/* Footer */}

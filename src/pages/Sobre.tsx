@@ -6,6 +6,7 @@ const Sobre = () => {
     <PalpiteLayout 
       searchTerm="" 
       onSearchChange={() => {}}
+      useGrid={false}
     >
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="max-w-3xl mx-auto text-center">
