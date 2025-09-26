@@ -83,7 +83,7 @@ export const PalpiteLayout = ({
               </Link>
               <Link 
                 to="/sobre" 
-                className="text-sm font-bold text-muted-foreground hover:text-foreground transition-colors"
+                className="text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors"
               >
                 Sobre nós
               </Link>
