@@ -4,7 +4,7 @@ import { getCategoryIcon, getCategoryName } from "../data/palpiteData";
 import palpiteLogo from "../assets/palpite-logo.svg";
 import { Input } from "./ui/input";
 import { useIsMobile } from "../hooks/use-mobile";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 interface PalpiteLayoutProps {
   children: ReactNode;
@@ -26,6 +26,8 @@ export const PalpiteLayout = ({
   const [activeCategory, setActiveCategory] = useState<Category>('todos');
   const [showSearchInput, setShowSearchInput] = useState(false);
   const isMobile = useIsMobile();
+  const navigate = useNavigate();
+  const location = useLocation();
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -130,6 +132,10 @@ export const PalpiteLayout = ({
               <button
                 key={category.key}
                 onClick={() => {
+                  // Se não estiver na página principal, navegar para ela primeiro
+                  if (location.pathname !== '/') {
+                    navigate('/');
+                  }
                   setActiveCategory(category.key);
                   onCategoryChange?.(category.key);
                 }}
