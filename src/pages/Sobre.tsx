@@ -16,15 +16,19 @@ const Sobre = () => {
           
           <div className="bg-card/80 backdrop-blur-sm rounded-2xl p-8 md:p-12">
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-              Somos um time de estudantes de <a href="https://somostera.com/mba-lideranca-estrategia-produtos-digitais" className="text-primary hover:underline">MBA</a> da <a href="https://somostera.com/" className="text-primary hover:underline">Tera</a>, unidos pela paixão por inovação e pelo potencial da inteligência coletiva. Com o objetivo de transformar ideias em soluções tangíveis, estamos empolgados em apresentar e testar nosso primeiro produto, um MVP (Produto Mínimo Viável).
+              Somos estudantes do <a href="https://somostera.com/mba-lideranca-estrategia-produtos-digitais" className="text-primary hover:underline">MBA em Produtos Digitais</a> da <a href="https://somostera.com/" className="text-primary hover:underline">Tera</a>, unidos pela vontade de transformar ideias em experiências concretas. Este projeto nasceu da observação do crescimento das apostas online no Brasil, um mercado enorme, mas que vem acompanhado de desconfiança, dívidas e consequências negativas para muitas pessoas.
             </p>
             
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mt-6">
-              Este projeto é mais do que apenas um teste de mercado; é uma oportunidade de aprendizado para nós. Cada interação, feedback e resultado nos ajuda a entender melhor as necessidades do nosso público e a refinar nossa visão, permitindo-nos construir algo verdadeiramente valioso e significativo.
+              Escolhemos seguir por outro caminho. Criamos o Palpite, um MVP que testa como a inteligência coletiva pode se manifestar de forma leve e divertida. A proposta é simples: trazer perguntas sobre esportes, cultura e atualidades e permitir que qualquer pessoa dê seu palpite e veja, em tempo real, como a opinião da comunidade se distribui.
+            </p>
+
+            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mt-6">
+              Aqui o valor não está em promessas de dinheiro fácil, mas no jogo social, na curiosidade e na conversa. Cada palpite é uma oportunidade de refletir, rir e descobrir como pensamos em conjunto.
             </p>
             
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mt-6">
-              Agradecemos por fazer parte desta jornada de crescimento e co-criação.
+              O Palpite é o primeiro passo de uma jornada que busca provar que é possível criar plataformas engajantes sem cair nos mesmos vícios do mercado de apostas, oferecendo uma alternativa saudável, transparente e divertida.
             </p>
           </div>
         </div>
