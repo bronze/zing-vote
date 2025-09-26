@@ -34,6 +34,10 @@ const Sobre = () => {
             <p className="text-lg md:text-xl text-foreground leading-relaxed mt-6">
               Agradecemos por estar aqui e participar deste experimento com a gente. Cada voto, cada palpite e cada interação nos ajuda a aprender e evoluir.
             </p>
+
+            <p className="text-lg md:text-xl text-foreground leading-relaxed mt-6">
+              - Grupo7
+            </p>
           </div>
         </div>
       </div>
