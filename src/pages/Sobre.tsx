@@ -14,7 +14,7 @@ const Sobre = () => {
             Sobre nós
           </h1>
           
-          <div className="bg-card/80 backdrop-blur-sm rounded-2xl p-8 md:p-12 border">
+          <div className="bg-card/80 backdrop-blur-sm rounded-2xl p-8 md:p-12">
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
               Somos um time de estudantes de <a href="https://somostera.com/mba-lideranca-estrategia-produtos-digitais" className="text-primary hover:underline">MBA</a> da <a href="https://somostera.com/" className="text-primary hover:underline">Tera</a>, unidos pela paixão por inovação e pelo potencial da inteligência coletiva. Com o objetivo de transformar ideias em soluções tangíveis, estamos empolgados em apresentar e testar nosso primeiro produto, um MVP (Produto Mínimo Viável).
             </p>
