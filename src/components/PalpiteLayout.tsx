@@ -76,7 +76,11 @@ export const PalpiteLayout = ({
           <div className="flex items-center justify-between">
             {/* Logo and Navigation */}
             <div className="flex items-center gap-6">
-              <img src={palpiteLogo} alt="Palpite" className="h-8" />
+              <Link 
+                to="/"
+              >
+                <img src={palpiteLogo} alt="Palpite" className="h-8" />
+              </Link>
               <Link 
                 to="/sobre" 
                 className="text-sm text-muted-foreground hover:text-foreground transition-colors"
