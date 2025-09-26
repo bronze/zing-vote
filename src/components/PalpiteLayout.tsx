@@ -149,7 +149,7 @@ export const PalpiteLayout = ({
       </main>
 
       {/* Footer */}
-      <footer className="mt-12 py-8 text-center border-t border-border">
+      <footer className="mt-12 py-8 text-center">
         <p className="text-sm text-muted-foreground">
           Palpite • Onde as opiniões ganham vida •{" "}
           <Link 
