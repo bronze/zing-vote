@@ -36,7 +36,7 @@ const Sobre = () => {
             </p>
 
             <p className="text-lg md:text-xl text-foreground leading-relaxed mt-6">
-              - Grupo7
+              <em>Grupo7</em>
             </p>
           </div>
         </div>
