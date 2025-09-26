@@ -70,9 +70,15 @@ export const PalpiteLayout = ({
       <header className="backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            {/* Logo */}
-            <div className="flex items-center">
+            {/* Logo and Navigation */}
+            <div className="flex items-center gap-6">
               <img src={palpiteLogo} alt="Palpite" className="h-8" />
+              <Link 
+                to="/sobre" 
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Sobre nós
+              </Link>
             </div>
 
             {/* Search */}
