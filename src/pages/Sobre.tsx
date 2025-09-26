@@ -30,6 +30,10 @@ const Sobre = () => {
             <p className="text-lg md:text-xl text-foreground leading-relaxed mt-6">
               O Palpite é o primeiro passo de uma jornada que busca provar que é possível criar plataformas engajantes sem cair nos mesmos vícios do mercado de apostas, oferecendo uma alternativa saudável, transparente e divertida.
             </p>
+
+            <p className="text-lg md:text-xl text-foreground leading-relaxed mt-6">
+              Agradecemos por estar aqui e participar deste experimento com a gente. Cada voto, cada palpite e cada interação nos ajuda a aprender e evoluir.
+            </p>
           </div>
         </div>
       </div>
