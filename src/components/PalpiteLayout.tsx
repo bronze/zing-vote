@@ -81,12 +81,14 @@ export const PalpiteLayout = ({
               >
                 <img src={palpiteLogo} alt="Palpite" className="h-8" />
               </Link>
-              <Link 
+              <!-- 
+                <Link 
                 to="/sobre" 
                 className="text-sm font-semibold text-nav hover:text-foreground transition-colors"
               >
                 Sobre nós
               </Link>
+                -->
             </div>
 
             {/* Search */}
