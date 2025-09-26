@@ -16,7 +16,7 @@ const Sobre = () => {
           
           <div className="bg-card/80 backdrop-blur-sm rounded-2xl p-8 md:p-12">
             <p className="text-lg md:text-xl text-foreground leading-relaxed">
-              Somos estudantes do <a href="https://somostera.com/mba-lideranca-estrategia-produtos-digitais" className="text-primary hover:underline">MBA em Produtos Digitais</a> da <a href="https://somostera.com/" className="text-primary hover:underline">Tera</a>, unidos pela vontade de transformar ideias em experiências concretas. Este projeto nasceu da observação do crescimento das apostas online no Brasil, um mercado enorme, mas que vem acompanhado de desconfiança, dívidas e consequências negativas para muitas pessoas.
+              Somos estudantes do <a href="https://somostera.com/mba-lideranca-estrategia-produtos-digitais" className="text-primary hover:underline font-semibold">MBA em Produtos Digitais</a> da <a href="https://somostera.com/" className="text-primary hover:underline font-semibold">Tera</a>, unidos pela vontade de transformar ideias em experiências concretas. Este projeto nasceu da observação do crescimento das apostas online no Brasil, um mercado enorme, mas que vem acompanhado de desconfiança, dívidas e consequências negativas para muitas pessoas.
             </p>
             
             <p className="text-lg md:text-xl text-foreground leading-relaxed mt-6">
