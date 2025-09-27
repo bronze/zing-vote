@@ -7,7 +7,7 @@ import { useQuestions } from "../hooks/useQuestions";
 type Category = 'todos' | 'futebol' | 'politica' | 'celebridades' | 'televisao';
 
 const Index = () => {
-  const { questions, loading, error, submitVote, hasUserVoted } = useQuestions();
+  const { questions, loading, error, submitVote, hasUserVoted, getUserVote } = useQuestions();
   const [selectedCategory, setSelectedCategory] = useState<Category>('todos');
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -127,6 +127,7 @@ const Index = () => {
               question={question} 
               onVote={submitVote}
               hasUserVoted={hasUserVoted(question.id)}
+              userVote={getUserVote(question.id)}
             />
           </motion.div>
         ))}

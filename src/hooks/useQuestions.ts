@@ -34,17 +34,21 @@ export const useQuestions = () => {
 
   // Check if user already voted for a question
   const hasUserVoted = (questionId: string): boolean => {
-    const votedQuestions = JSON.parse(localStorage.getItem('voted_questions') || '[]');
-    return votedQuestions.includes(questionId);
+    const userVotes = JSON.parse(localStorage.getItem('user_votes') || '{}');
+    return userVotes[questionId] !== undefined;
   };
 
-  // Mark question as voted
-  const markAsVoted = (questionId: string) => {
-    const votedQuestions = JSON.parse(localStorage.getItem('voted_questions') || '[]');
-    if (!votedQuestions.includes(questionId)) {
-      votedQuestions.push(questionId);
-      localStorage.setItem('voted_questions', JSON.stringify(votedQuestions));
-    }
+  // Get user's vote for a question
+  const getUserVote = (questionId: string): 'option_a' | 'option_b' | null => {
+    const userVotes = JSON.parse(localStorage.getItem('user_votes') || '{}');
+    return userVotes[questionId] || null;
+  };
+
+  // Mark question as voted with the chosen option
+  const markAsVoted = (questionId: string, option: 'option_a' | 'option_b') => {
+    const userVotes = JSON.parse(localStorage.getItem('user_votes') || '{}');
+    userVotes[questionId] = option;
+    localStorage.setItem('user_votes', JSON.stringify(userVotes));
   };
 
   // Fetch questions with vote counts
@@ -125,8 +129,8 @@ export const useQuestions = () => {
 
       if (error) throw error;
 
-      // Mark as voted locally
-      markAsVoted(questionId);
+      // Mark as voted locally with the chosen option
+      markAsVoted(questionId, option);
 
       // Update local state optimistically
       setQuestions(prev => prev.map(q => {
@@ -193,6 +197,7 @@ export const useQuestions = () => {
     error,
     submitVote,
     hasUserVoted,
+    getUserVote,
     refreshVoteCounts,
     refetch: fetchQuestions
   };

@@ -7,12 +7,13 @@ interface PalpiteCardProps {
   question: Question;
   onVote?: (questionId: string, option: 'option_a' | 'option_b') => Promise<boolean>;
   hasUserVoted?: boolean;
+  userVote?: 'option_a' | 'option_b' | null;
 }
 
-export const PalpiteCard = ({ question, onVote, hasUserVoted = false }: PalpiteCardProps) => {
+export const PalpiteCard = ({ question, onVote, hasUserVoted = false, userVote = null }: PalpiteCardProps) => {
   const [isVoting, setIsVoting] = useState(false);
   const [hasVoted, setHasVoted] = useState(hasUserVoted);
-  const [userVote, setUserVote] = useState<'option_a' | 'option_b' | null>(null);
+  const [currentUserVote, setCurrentUserVote] = useState<'option_a' | 'option_b' | null>(userVote);
   const [currentVotes, setCurrentVotes] = useState({
     votesA: question.votes_a,
     votesB: question.votes_b
@@ -31,7 +32,7 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false }: PalpiteC
       const success = await onVote?.(question.id, option);
       
       if (success) {
-        setUserVote(option);
+        setCurrentUserVote(option);
         setHasVoted(true);
         
         // Update local vote counts optimistically
@@ -106,7 +107,7 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false }: PalpiteC
           {/* Vote counts and percentages */}
           <div className="flex justify-between items-center text-xs">
             <div className="text-left">
-              <span className={`font-semibold ${userVote === 'option_a' ? 'text-vote-sim' : 'text-muted-foreground'}`}>
+              <span className={`font-semibold ${currentUserVote === 'option_a' ? 'text-vote-sim' : 'text-muted-foreground'}`}>
                 <strong>{question.option_a}</strong> • {percentageA.toFixed(0)}%
               </span>
               <br />
@@ -115,7 +116,7 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false }: PalpiteC
               </span>
             </div>
             <div className="text-right">
-              <span className={`font-semibold ${userVote === 'option_b' ? 'text-vote-nao' : 'text-muted-foreground'}`}>
+              <span className={`font-semibold ${currentUserVote === 'option_b' ? 'text-vote-nao' : 'text-muted-foreground'}`}>
                  {percentageB.toFixed(0)}% • <strong>{question.option_b}</strong>
               </span>
               <br />
