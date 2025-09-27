@@ -137,6 +137,7 @@ export const PalpiteLayout = ({
             {categories.map((category) => (
               <button
                 key={category.key}
+                data-ph-capture-attribute-nav={category.key}
                 onClick={() => {
                   // Track category selection
                   posthog.capture('category_selected', {
