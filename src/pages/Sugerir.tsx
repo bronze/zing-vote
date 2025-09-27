@@ -11,7 +11,7 @@ const Sugerir = () => {
       <div className="flex flex-col items-center justify-center min-h-[60vh]">
         <div className="max-w-4xl mx-auto w-full">
           <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-8 text-center">
-            Sugira um tópico de pergunta 🧠
+            Sugira um tópico
           </h1>
           
           <div className="bg-card/80 backdrop-blur-sm rounded-2xl p-4 md:p-8">
