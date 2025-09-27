@@ -140,8 +140,8 @@ export const PalpiteLayout = ({
                 onClick={() => {
                   // Track category selection
                   posthog.capture('category_selected', {
-                    category: category.key,
-                    category_label: category.label
+                    category_selected_key: category.key,
+                    category_selected_label: category.label
                   });
                   
                   // Se não estiver na página principal, navegar para ela primeiro
