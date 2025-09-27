@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { posthog } from '@/lib/posthog';
 
 export interface Question {
   id: string;
@@ -143,6 +144,15 @@ export const useQuestions = () => {
         }
         return q;
       }));
+
+      // Track successful vote with PostHog
+      const question = questions.find(q => q.id === questionId);
+      posthog.capture('vote_submitted', {
+        question_id: questionId,
+        option: option === 'option_a' ? 'sim' : 'nao',
+        category: question?.category || 'unknown',
+        question_text: question?.question_text || 'unknown'
+      });
 
       toast({
         title: "Voto registrado!",
