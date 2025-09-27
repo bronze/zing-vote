@@ -161,7 +161,9 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false, userVote =
         <motion.button
           onClick={() => handleVote('option_a')}
           disabled={hasVoted || isVoting || !question.is_open}
-          className="vote-button flex-1 disabled:opacity-50 disabled:cursor-not-allowed"
+          className={`vote-button flex-1 disabled:opacity-50 ${
+            hasVoted || isVoting || !question.is_open ? 'cursor-default' : 'cursor-pointer'
+          }`}
           whileHover={!hasVoted && !isVoting && question.is_open ? { scale: 1.05 } : {}}
           whileTap={!hasVoted && !isVoting && question.is_open ? { scale: 0.95 } : {}}
           transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -181,7 +183,9 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false, userVote =
         <motion.button
           onClick={() => handleVote('option_b')}
           disabled={hasVoted || isVoting || !question.is_open}
-          className="vote-button flex-1 disabled:opacity-50 disabled:cursor-not-allowed"
+          className={`vote-button flex-1 disabled:opacity-50 ${
+            hasVoted || isVoting || !question.is_open ? 'cursor-default' : 'cursor-pointer'
+          }`}
           whileHover={!hasVoted && !isVoting && question.is_open ? { scale: 1.05 } : {}}
           whileTap={!hasVoted && !isVoting && question.is_open ? { scale: 0.95 } : {}}
           transition={{ type: "spring", stiffness: 400, damping: 17 }}
