@@ -84,6 +84,7 @@
   body {
     @apply text-foreground min-h-screen;
     background: radial-gradient(83.86% 47.1% at 49.87% -20.31%, #2BB6C2 0%, #012F33 100%);
+    overflow-y: scroll; /* Always show vertical scrollbar */
   }
 }
 
