@@ -148,10 +148,10 @@ export const useQuestions = () => {
       // Track successful vote with PostHog
       const question = questions.find(q => q.id === questionId);
       posthog.capture('vote_submitted', {
-        question_id: questionId,
-        option: option === 'option_a' ? 'sim' : 'nao',
-        category: question?.category || 'unknown',
-        question_text: question?.question_text || 'unknown'
+        vote_submitted_question_id: questionId,
+        vote_submitted_option: option === 'option_a' ? 'sim' : 'nao',
+        vote_submitted_category: question?.category || 'unknown',
+        vote_submitted_question_text: question?.question_text || 'unknown'
       });
 
       toast({
