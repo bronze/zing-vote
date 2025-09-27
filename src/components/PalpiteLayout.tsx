@@ -133,7 +133,7 @@ export const PalpiteLayout = ({
       {/* Category Navigation */}
       <nav className="backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 py-3">
-          <div className="flex space-x-1 overflow-x-auto scrollbar-hide">
+          <div className="flex space-x-1 overflow-x-auto scrollbar-hide" data-attr="filters">
             {categories.map((category) => (
               <button
                 key={category.key}
