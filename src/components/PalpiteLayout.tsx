@@ -232,6 +232,13 @@ export const PalpiteLayout = ({
           >
             Sobre nós
           </Link>
+          {" • "}
+          <Link 
+            to="/sugerir" 
+            className="text-white/70 hover:text-white hover:underline transition-colors"
+          >
+            Sugira um tópico
+          </Link>
         </p>
       </footer>
     </div>
