@@ -5,6 +5,7 @@ import palpiteLogo from "../assets/palpite-logo.svg";
 import { Input } from "./ui/input";
 import { useIsMobile } from "../hooks/use-mobile";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import { posthog } from "../lib/posthog";
 
 interface PalpiteLayoutProps {
   children: ReactNode;
@@ -137,6 +138,12 @@ export const PalpiteLayout = ({
               <button
                 key={category.key}
                 onClick={() => {
+                  // Track category selection
+                  posthog.capture('category_selected', {
+                    category: category.key,
+                    category_label: category.label
+                  });
+                  
                   // Se não estiver na página principal, navegar para ela primeiro
                   if (location.pathname !== '/') {
                     navigate('/');
