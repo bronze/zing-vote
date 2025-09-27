@@ -126,7 +126,7 @@
   .vote-button,
   .vote-button-a,
   .vote-button-b {
-    @apply text-white font-semibold px-6 py-2 rounded-xl transition-all duration-100 flex items-center gap-2;
+    @apply text-white font-semibold px-6 py-2 rounded-xl flex items-center gap-2;
     background-color: hsl(var(--vote-button-bg));
   }
 
