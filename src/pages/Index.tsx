@@ -5,10 +5,12 @@ import { PalpiteCard } from "../components/PalpiteCard";
 import { useQuestions } from "../hooks/useQuestions";
 
 type Category = 'todos' | 'futebol' | 'politica' | 'celebridades' | 'televisao';
+type VoteStatus = 'todos' | 'nao_votei' | 'ja_votei';
 
 const Index = () => {
   const { questions, loading, error, submitVote, hasUserVoted, getUserVote } = useQuestions();
   const [selectedCategory, setSelectedCategory] = useState<Category>('todos');
+  const [selectedVoteStatus, setSelectedVoteStatus] = useState<VoteStatus>('todos');
   const [searchTerm, setSearchTerm] = useState('');
 
   const filteredQuestions = useMemo(() => {
@@ -21,6 +23,14 @@ const Index = () => {
       );
     }
     
+    // Filter by vote status
+    if (selectedVoteStatus !== 'todos') {
+      filtered = filtered.filter(question => {
+        const hasVoted = hasUserVoted(question.id);
+        return selectedVoteStatus === 'ja_votei' ? hasVoted : !hasVoted;
+      });
+    }
+    
     // Filter by search term
     if (searchTerm.trim()) {
       filtered = filtered.filter(question =>
@@ -29,7 +39,7 @@ const Index = () => {
     }
     
     return filtered;
-  }, [questions, selectedCategory, searchTerm]);
+  }, [questions, selectedCategory, selectedVoteStatus, searchTerm, hasUserVoted]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -69,6 +79,7 @@ const Index = () => {
     return (
       <PalpiteLayout 
         onCategoryChange={setSelectedCategory}
+        onVoteStatusChange={setSelectedVoteStatus}
         searchTerm={searchTerm}
         onSearchChange={setSearchTerm}
       >
@@ -83,6 +94,7 @@ const Index = () => {
     return (
       <PalpiteLayout 
         onCategoryChange={setSelectedCategory}
+        onVoteStatusChange={setSelectedVoteStatus}
         searchTerm={searchTerm}
         onSearchChange={setSearchTerm}
       >
@@ -97,6 +109,7 @@ const Index = () => {
     return (
       <PalpiteLayout 
         onCategoryChange={setSelectedCategory}
+        onVoteStatusChange={setSelectedVoteStatus}
         searchTerm={searchTerm}
         onSearchChange={setSearchTerm}
       >
@@ -112,6 +125,7 @@ const Index = () => {
   return (
     <PalpiteLayout 
       onCategoryChange={setSelectedCategory}
+      onVoteStatusChange={setSelectedVoteStatus}
       searchTerm={searchTerm}
       onSearchChange={setSearchTerm}
     >

@@ -10,21 +10,25 @@ import { posthog } from "../lib/posthog";
 interface PalpiteLayoutProps {
   children: ReactNode;
   onCategoryChange?: (category: Category) => void;
+  onVoteStatusChange?: (status: VoteStatus) => void;
   searchTerm: string;
   onSearchChange: (term: string) => void;
   useGrid?: boolean;
 }
 
 type Category = 'todos' | 'futebol' | 'politica' | 'celebridades' | 'televisao';
+type VoteStatus = 'todos' | 'nao_votei' | 'ja_votei';
 
 export const PalpiteLayout = ({ 
   children, 
   onCategoryChange, 
+  onVoteStatusChange,
   searchTerm, 
   onSearchChange,
   useGrid = true
 }: PalpiteLayoutProps) => {
   const [activeCategory, setActiveCategory] = useState<Category>('todos');
+  const [activeVoteStatus, setActiveVoteStatus] = useState<VoteStatus>('todos');
   const [showSearchInput, setShowSearchInput] = useState(false);
   const isMobile = useIsMobile();
   const navigate = useNavigate();
@@ -52,6 +56,12 @@ export const PalpiteLayout = ({
     { key: 'politica', label: getCategoryName('politica'), icon: getCategoryIcon('politica') },
     { key: 'celebridades', label: getCategoryName('celebridades'), icon: getCategoryIcon('celebridades') },
     { key: 'televisao', label: getCategoryName('televisao'), icon: getCategoryIcon('televisao') }
+  ];
+
+  const voteStatusOptions: { key: VoteStatus; label: string; icon?: string }[] = [
+    { key: 'todos', label: 'Todos', icon: '📊' },
+    { key: 'nao_votei', label: 'Ainda não votei', icon: '🔘' },
+    { key: 'ja_votei', label: 'Já votei', icon: '✅' }
   ];
 
   const getCategoryActiveClass = (category: Category) => {
@@ -162,6 +172,39 @@ export const PalpiteLayout = ({
               >
                 <span>{category.icon}</span>
                 <span className="text-sm">{category.label}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      </nav>
+
+      {/* Vote Status Navigation */}
+      <nav className="backdrop-blur-sm border-t border-border/10">
+        <div className="max-w-7xl mx-auto px-4 py-3">
+          <div className="flex space-x-1 overflow-x-auto scrollbar-hide">
+            {voteStatusOptions.map((status) => (
+              <button
+                key={status.key}
+                data-ph-capture-attribute-vote-filter={status.key}
+                onClick={() => {
+                  posthog.capture('vote_status_filter_selected', {
+                    vote_status_filter_key: status.key,
+                    vote_status_filter_label: status.label
+                  });
+                  
+                  setActiveVoteStatus(status.key);
+                  onVoteStatusChange?.(status.key);
+                }}
+                className={`
+                  px-4 py-2 rounded-lg whitespace-nowrap flex items-center space-x-2 transition-all
+                  ${activeVoteStatus === status.key 
+                    ? 'bg-white/10 text-white font-semibold'
+                    : 'text-nav bg-[#427378]/30 hover:text-foreground hover:bg-secondary/40'
+                  }
+                `}
+              >
+                <span>{status.icon}</span>
+                <span className="text-sm">{status.label}</span>
               </button>
             ))}
           </div>
