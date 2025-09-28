@@ -225,7 +225,13 @@ export const PalpiteLayout = ({
       {/* Footer */}
       <footer className="my-12 py-8 text-center text-sm text-muted-foreground flex flex-col md:flex-row gap-2 md:gap-6 mx-auto w-full place-content-center place-items-center">
         <p>
-          Palpite • Onde as opiniões ganham vida
+          Palpite
+        </p>
+        <p>
+          {" "}•{" "}
+        </p>
+        <p>
+          Onde as opiniões ganham vida
         </p>
         <p>
           {" "}•{" "}
