@@ -223,16 +223,25 @@ export const PalpiteLayout = ({
       </main>
 
       {/* Footer */}
-      <footer className="mt-12 py-8 text-center">
-        <p className="text-sm text-muted-foreground">
-          Palpite • Onde as opiniões ganham vida •{" "}
+      <footer className="mt-12 py-8 text-center text-sm text-muted-foreground flex flex-col md:flex-row md:gap-6 mx-auto w-full place-content-center place-items-center">
+        <p>
+          Palpite • Onde as opiniões ganham vida
+        </p>
+        <p>
+          {" "}•{" "}
+        </p>
+        <p>
           <Link 
             to="/sobre" 
             className="text-white/70 hover:text-white hover:underline transition-colors ml-1"
           >
             Sobre nós
           </Link>
-          {" • "}
+        </p>
+        <p>
+          {" "}•{" "}
+        </p>
+        <p>
           <Link 
             to="/sugerir" 
             className="text-white/70 hover:text-white hover:underline transition-colors"
