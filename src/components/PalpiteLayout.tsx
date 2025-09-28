@@ -223,39 +223,39 @@ export const PalpiteLayout = ({
       </main>
 
       {/* Footer */}
-      <footer className="my-12 py-8 text-center text-sm text-muted-foreground flex flex-col md:flex-row gap-2 md:gap-6 mx-auto w-full place-content-center place-items-center">
-        <p>
-          Palpite
-        </p>
-        <p>
-          {" "}•{" "}
-        </p>
-        <p>
-          Onde as opiniões ganham vida
-        </p>
-        <p>
-          {" "}•{" "}
-        </p>
-        <p>
-          <Link 
-            to="/sobre" 
-            className="text-white/70 hover:text-white hover:underline transition-colors ml-1"
-          >
-            Sobre nós
-          </Link>
-        </p>
-        <p>
-          {" "}•{" "}
-        </p>
-        <p>
-          <Link 
-            to="/sugerir" 
-            className="text-white/70 hover:text-white hover:underline transition-colors"
-          >
-            Sugira um tópico
-          </Link>
-        </p>
+      <footer className="mt-12 py-8 text-center text-sm text-muted-foreground">
+        {/* linha 1: links */}
+        <div className="flex flex-col md:flex-row gap-2 md:gap-6 justify-center items-center">
+          <p>
+            <Link
+              to="/sobre"
+              className="text-white/70 hover:text-white hover:underline transition-colors"
+            >
+              Sobre nós
+            </Link>
+          </p>
+          <p>•</p>
+          <p>
+            <Link
+              to="/sugerir"
+              className="text-white/70 hover:text-white hover:underline transition-colors"
+            >
+              Sugira um tópico
+            </Link>
+          </p>
+        </div>
+      
+        {/* ponto extra só no mobile */}
+        <div className="block md:hidden">•</div>
+      
+        {/* linha 2: tagline */}
+        <div className="flex flex-col md:flex-row gap-2 md:gap-6 justify-center items-center mt-2">
+          <p>Palpite</p>
+          <p>•</p>
+          <p>Onde as opiniões ganham vida</p>
+        </div>
       </footer>
+
     </div>
   );
 };
