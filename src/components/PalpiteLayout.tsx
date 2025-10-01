@@ -225,7 +225,7 @@ export const PalpiteLayout = ({
       {/* Footer */}
       <footer className="mt-12 py-8 text-center text-sm text-muted-foreground">
         {/* linha 1: links */}
-        <div className="flex flex-col md:flex-row gap-2 md:gap-6 justify-center items-center">
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-6 justify-center items-center">
           <p>
             <Link
               to="/sobre"
@@ -249,7 +249,7 @@ export const PalpiteLayout = ({
         <div className="block mt-2 md:hidden">•</div>
       
         {/* linha 2: tagline */}
-        <div className="flex flex-col md:flex-row gap-2 md:gap-6 justify-center items-center mt-2 md:mt-6">
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-6 justify-center items-center mt-2 sm:mt-6">
           <p>Palpite</p>
           <p>•</p>
           <p>Onde as opiniões ganham vida</p>
