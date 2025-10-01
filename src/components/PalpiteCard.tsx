@@ -79,11 +79,11 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false, userVote =
 
       {/* Question with profile image */}
       <div className="flex items-start gap-3">
-        <img 
+        {/* <img 
           src={question.profile_image || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face'} 
           alt="Profile" 
           className="w-10 h-10 rounded-full object-cover"
-        />
+        /> */}
         <h3 className="text-sm font-medium text-foreground leading-relaxed flex-1">
           {question.question_text}
         </h3>
