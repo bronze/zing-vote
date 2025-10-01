@@ -246,7 +246,7 @@ export const PalpiteLayout = ({
         </div>
       
         {/* ponto extra só no mobile */}
-        <div className="block mt-2 md:hidden">•</div>
+        <div className="block mt-2 sm:hidden">•</div>
       
         {/* linha 2: tagline */}
         <div className="flex flex-col sm:flex-row gap-2 sm:gap-6 justify-center items-center mt-2 sm:mt-6">
