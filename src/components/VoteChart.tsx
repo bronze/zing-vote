@@ -28,6 +28,7 @@ export const VoteChart = ({ questionId, optionA, optionB }: VoteChartProps) => {
         setLoading(true);
         setError(null);
 
+        // Fetch all snapshots
         const { data: snapshots, error: snapshotError } = await supabase
           .from('vote_snapshots')
           .select('*')
@@ -36,14 +37,31 @@ export const VoteChart = ({ questionId, optionA, optionB }: VoteChartProps) => {
 
         if (snapshotError) throw snapshotError;
 
-        if (!snapshots || snapshots.length < 2) {
+        if (!snapshots || snapshots.length === 0) {
+          setError('Dados insuficientes para exibir o gráfico');
+          setLoading(false);
+          return;
+        }
+
+        // Group by day - keep only the last snapshot of each day
+        const dailyMap = new Map<string, any>();
+        snapshots.forEach(snapshot => {
+          const date = new Date(snapshot.timestamp);
+          const dayKey = format(date, 'yyyy-MM-dd');
+          // This will overwrite previous snapshots from same day, keeping only the last
+          dailyMap.set(dayKey, snapshot);
+        });
+
+        const dailySnapshots = Array.from(dailyMap.values());
+        
+        if (dailySnapshots.length < 2) {
           setError('Dados insuficientes para exibir o gráfico');
           setLoading(false);
           return;
         }
 
         // Transform data to percentages
-        const chartData = snapshots.map(snapshot => {
+        const chartData = dailySnapshots.map(snapshot => {
           const total = snapshot.votes_a + snapshot.votes_b;
           const percentage_a = total > 0 ? (snapshot.votes_a / total) * 100 : 50;
           const percentage_b = total > 0 ? (snapshot.votes_b / total) * 100 : 50;
@@ -73,7 +91,7 @@ export const VoteChart = ({ questionId, optionA, optionB }: VoteChartProps) => {
       return (
         <div className="bg-card border border-border rounded-lg p-3 shadow-lg">
           <p className="text-xs text-muted-foreground mb-2">
-            {format(date, "dd MMM, HH:mm", { locale: ptBR })}
+            {format(date, "dd 'de' MMM", { locale: ptBR })}
           </p>
           <p className="text-sm font-medium" style={{ color: 'hsl(var(--vote-sim))' }}>
             {optionA}: {payload[0].value}%
@@ -133,7 +151,7 @@ export const VoteChart = ({ questionId, optionA, optionB }: VoteChartProps) => {
             <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" opacity={0.3} />
             <XAxis 
               dataKey="timestamp" 
-              tickFormatter={(timestamp) => format(new Date(timestamp), "dd/MM HH:mm", { locale: ptBR })}
+              tickFormatter={(timestamp) => format(new Date(timestamp), "dd/MM", { locale: ptBR })}
               stroke="hsl(var(--muted-foreground))"
               fontSize={12}
               tick={{ fill: 'hsl(var(--muted-foreground))' }}
