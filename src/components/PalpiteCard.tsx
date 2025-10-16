@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 import { getCategoryIcon, getCategoryName } from "../data/palpiteData";
 import { Question } from "../hooks/useQuestions";
 
@@ -84,9 +85,11 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false, userVote =
           alt="Profile" 
           className="w-10 h-10 rounded-full object-cover"
         /> */}
-        <h3 className="text-sm font-medium text-foreground leading-relaxed flex-1">
-          {question.question_text}
-        </h3>
+        <Link to={`/palpite/${question.id}`} className="flex-1 group">
+          <h3 className="text-sm font-medium text-foreground leading-relaxed group-hover:text-primary transition-colors">
+            {question.question_text}
+          </h3>
+        </Link>
       </div>
 
       {/* Results or loading state */}
