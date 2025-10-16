@@ -11,8 +11,8 @@ interface PalpiteLayoutProps {
   children: ReactNode;
   onCategoryChange?: (category: Category) => void;
   onVoteStatusChange?: (status: VoteStatus) => void;
-  searchTerm: string;
-  onSearchChange: (term: string) => void;
+  searchTerm?: string;
+  onSearchChange?: (term: string) => void;
   useGrid?: boolean;
 }
 
@@ -23,7 +23,7 @@ export const PalpiteLayout = ({
   children, 
   onCategoryChange, 
   onVoteStatusChange,
-  searchTerm, 
+  searchTerm = '', 
   onSearchChange,
   useGrid = true
 }: PalpiteLayoutProps) => {
@@ -44,7 +44,7 @@ export const PalpiteLayout = ({
   const handleSearchToggle = () => {
     if (showSearchInput) {
       setShowSearchInput(false);
-      onSearchChange('');
+      onSearchChange?.('');
     } else {
       setShowSearchInput(true);
     }
@@ -111,7 +111,7 @@ export const PalpiteLayout = ({
                       type="text"
                       placeholder="Digite para buscar..."
                       value={searchTerm}
-                      onChange={(e) => onSearchChange(e.target.value)}
+                      onChange={(e) => onSearchChange?.(e.target.value)}
                       className={`
                         bg-voteTrack border-0 placeholder:text-gray-400 
                         focus:ring-2 focus:ring-primary transition-all duration-300 ease-in-out
