@@ -82,6 +82,33 @@ export type Database = {
           },
         ]
       }
+      vote_snapshots: {
+        Row: {
+          created_at: string
+          id: string
+          question_id: string
+          timestamp: string
+          votes_a: number
+          votes_b: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          question_id: string
+          timestamp?: string
+          votes_a?: number
+          votes_b?: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          question_id?: string
+          timestamp?: string
+          votes_a?: number
+          votes_b?: number
+        }
+        Relationships: []
+      }
       vote_totals: {
         Row: {
           count: number

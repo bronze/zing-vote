@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet";
 import { motion } from "framer-motion";
 import { PalpiteLayout } from "../components/PalpiteLayout";
 import { PalpiteCard } from "../components/PalpiteCard";
+import { VoteChart } from "../components/VoteChart";
 import { Question } from "../hooks/useQuestions";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -269,6 +270,21 @@ const Palpite = () => {
               onVote={submitVote}
               hasUserVoted={hasUserVoted(question.id)}
               userVote={getUserVote(question.id)}
+            />
+          </motion.div>
+
+          {/* Vote Evolution Chart */}
+          <motion.div
+            variants={itemVariants}
+            initial="hidden"
+            animate="visible"
+            transition={{ delay: 0.2 }}
+            className="mt-6"
+          >
+            <VoteChart 
+              questionId={question.id}
+              optionA={question.option_a}
+              optionB={question.option_b}
             />
           </motion.div>
           
