@@ -87,7 +87,7 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false, userVote =
           alt="Profile" 
           className="w-10 h-10 rounded-full object-cover"
         /> */}
-        <h3 className="card-question text-sm font-medium text-foreground leading-relaxed flex-1">
+        <h3 className="card-question text-sm font-medium tracking-tight text-foreground leading-relaxed flex-1">
           {question.question_text}
         </h3>
       </div>
