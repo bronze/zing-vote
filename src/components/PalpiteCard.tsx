@@ -6,52 +6,52 @@ import { Question } from "../hooks/useQuestions";
 
 interface PalpiteCardProps {
   question: Question;
-  onVote?: (questionId: string, option: 'option_a' | 'option_b') => Promise<boolean>;
+  onVote?: (questionId: string, option: "option_a" | "option_b") => Promise<boolean>;
   hasUserVoted?: boolean;
-  userVote?: 'option_a' | 'option_b' | null;
+  userVote?: "option_a" | "option_b" | null;
 }
 
 export const PalpiteCard = ({ question, onVote, hasUserVoted = false, userVote = null }: PalpiteCardProps) => {
   const [isVoting, setIsVoting] = useState(false);
   const [hasVoted, setHasVoted] = useState(hasUserVoted);
-  const [currentUserVote, setCurrentUserVote] = useState<'option_a' | 'option_b' | null>(userVote);
+  const [currentUserVote, setCurrentUserVote] = useState<"option_a" | "option_b" | null>(userVote);
   const [currentVotes, setCurrentVotes] = useState({
     votesA: question.votes_a,
-    votesB: question.votes_b
+    votesB: question.votes_b,
   });
 
   const totalVotes = currentVotes.votesA + currentVotes.votesB;
   const percentageA = totalVotes > 0 ? (currentVotes.votesA / totalVotes) * 100 : 50;
   const percentageB = totalVotes > 0 ? (currentVotes.votesB / totalVotes) * 100 : 50;
 
-  const handleVote = async (option: 'option_a' | 'option_b') => {
+  const handleVote = async (option: "option_a" | "option_b") => {
     if (hasVoted || isVoting || !question.is_open) return;
 
     setIsVoting(true);
-    
+
     try {
       const success = await onVote?.(question.id, option);
-      
+
       if (success) {
         setCurrentUserVote(option);
         setHasVoted(true);
-        
+
         // Update local vote counts optimistically
-        setCurrentVotes(prev => ({
+        setCurrentVotes((prev) => ({
           ...prev,
-          votesA: option === 'option_a' ? prev.votesA + 1 : prev.votesA,
-          votesB: option === 'option_b' ? prev.votesB + 1 : prev.votesB
+          votesA: option === "option_a" ? prev.votesA + 1 : prev.votesA,
+          votesB: option === "option_b" ? prev.votesB + 1 : prev.votesB,
         }));
       }
     } catch (error) {
-      console.error('Error voting:', error);
+      console.error("Error voting:", error);
     } finally {
       setIsVoting(false);
     }
   };
 
   return (
-    <div 
+    <div
       className="palpite-card p-4 space-y-4"
       data-ph-capture-attribute-card={question.question_text}
       data-ph-capture-attribute-category={question.category}
@@ -62,14 +62,14 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false, userVote =
           <span>{getCategoryIcon(question.category as any)}</span>
           <span>{getCategoryName(question.category as any)}</span>
         </div>
-        
+
         {question.is_open && (
           <div className="status-aberto">
             <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
             <span>Em aberto</span>
           </div>
         )}
-        
+
         {!question.is_open && (
           <div className="status-encerrada">
             <div className="w-1.5 h-1.5 bg-red-500 rounded-full"></div>
@@ -97,11 +97,11 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false, userVote =
         <div className="space-y-3">
           {/* Result bars */}
           <div className="result-container">
-            <div 
+            <div
               className="result-bar result-bar-sim transition-all duration-700 ease-out"
               style={{ width: `${percentageA}%` }}
             />
-            <div 
+            <div
               className="result-bar result-bar-nao transition-all duration-700 ease-out"
               style={{ width: `${percentageB}%` }}
             />
@@ -110,22 +110,22 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false, userVote =
           {/* Vote counts and percentages */}
           <div className="flex justify-between items-center text-xs">
             <div className="text-left">
-              <span className={`font-semibold ${currentUserVote === 'option_a' ? 'text-vote-sim' : 'text-muted-foreground'}`}>
+              <span
+                className={`font-semibold ${currentUserVote === "option_a" ? "text-vote-sim" : "text-muted-foreground"}`}
+              >
                 <strong>{question.option_a}</strong> • {percentageA.toFixed(0)}%
               </span>
               <br />
-              <span className="text-muted-foreground">
-                {currentVotes.votesA.toLocaleString()} votos
-              </span>
+              <span className="text-muted-foreground">{currentVotes.votesA.toLocaleString()} votos</span>
             </div>
             <div className="text-right">
-              <span className={`font-semibold ${currentUserVote === 'option_b' ? 'text-vote-nao' : 'text-muted-foreground'}`}>
-                 {percentageB.toFixed(0)}% • <strong>{question.option_b}</strong>
+              <span
+                className={`font-semibold ${currentUserVote === "option_b" ? "text-vote-nao" : "text-muted-foreground"}`}
+              >
+                {percentageB.toFixed(0)}% • <strong>{question.option_b}</strong>
               </span>
               <br />
-              <span className="text-muted-foreground">
-                {currentVotes.votesB.toLocaleString()} votos
-              </span>
+              <span className="text-muted-foreground">{currentVotes.votesB.toLocaleString()} votos</span>
             </div>
           </div>
         </div>
@@ -133,25 +133,23 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false, userVote =
         <div className="space-y-3">
           {/* Preview result bars (before voting) */}
           <div className="result-container">
-            <div 
-              className="result-bar result-bar-sim"
-              style={{ width: `${percentageA}%` }}
-            />
-            <div 
-              className="result-bar result-bar-nao"
-              style={{ width: `${percentageB}%` }}
-            />
+            <div className="result-bar result-bar-sim" style={{ width: `${percentageA}%` }} />
+            <div className="result-bar result-bar-nao" style={{ width: `${percentageB}%` }} />
           </div>
 
           {/* Vote counts and percentages */}
           <div className="flex justify-between items-center text-xs text-muted-foreground">
             <div className="text-left">
-              <span><strong>{question.option_a}</strong> • {percentageA.toFixed(0)}%</span>
+              <span>
+                <strong>{question.option_a}</strong> • {percentageA.toFixed(0)}%
+              </span>
               <br />
               <span>{currentVotes.votesA.toLocaleString()} votos</span>
             </div>
             <div className="text-right">
-              <span>{percentageB.toFixed(0)}% • <strong>{question.option_b}</strong></span>
+              <span>
+                {percentageB.toFixed(0)}% • <strong>{question.option_b}</strong>
+              </span>
               <br />
               <span>{currentVotes.votesB.toLocaleString()} votos</span>
             </div>
@@ -160,23 +158,19 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false, userVote =
       )}
 
       {/* Vote buttons */}
-      <div className="flex gap-2 pt-2">
+      <div className="flex gap-2 pt-2 text-sm">
         <motion.button
-          onClick={() => handleVote('option_a')}
+          onClick={() => handleVote("option_a")}
           disabled={hasVoted || isVoting || !question.is_open}
           className={`vote-button flex-1 disabled:opacity-50 ${
-            hasVoted || isVoting || !question.is_open ? 'cursor-default' : 'cursor-pointer'
+            hasVoted || isVoting || !question.is_open ? "cursor-default" : "cursor-pointer"
           }`}
           whileHover={!hasVoted && !isVoting && question.is_open ? { scale: 1.05 } : {}}
           whileTap={!hasVoted && !isVoting && question.is_open ? { scale: 0.95 } : {}}
           transition={{ type: "spring", stiffness: 400, damping: 17 }}
         >
           {isVoting ? (
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
-            >
+            <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
               Votando...
             </motion.span>
           ) : (
@@ -184,21 +178,17 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false, userVote =
           )}
         </motion.button>
         <motion.button
-          onClick={() => handleVote('option_b')}
+          onClick={() => handleVote("option_b")}
           disabled={hasVoted || isVoting || !question.is_open}
           className={`vote-button flex-1 disabled:opacity-50 ${
-            hasVoted || isVoting || !question.is_open ? 'cursor-default' : 'cursor-pointer'
+            hasVoted || isVoting || !question.is_open ? "cursor-default" : "cursor-pointer"
           }`}
           whileHover={!hasVoted && !isVoting && question.is_open ? { scale: 1.05 } : {}}
           whileTap={!hasVoted && !isVoting && question.is_open ? { scale: 0.95 } : {}}
           transition={{ type: "spring", stiffness: 400, damping: 17 }}
         >
           {isVoting ? (
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
-            >
+            <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
               Votando...
             </motion.span>
           ) : (
