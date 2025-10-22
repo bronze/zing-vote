@@ -21,17 +21,17 @@
     --primary-glow: 180 90% 55%;
 
     /* New Figma colors for voting */
-    --vote-sim: 152 53% 52%;        /* #39C090 */
+    --vote-sim: 152 53% 52%; /* #39C090 */
     --vote-sim-foreground: 0 0% 100%;
     --vote-sim-glow: 152 53% 62%;
-    
-    --vote-nao: 358 52% 64%;        /* #D96A6D */
+
+    --vote-nao: 358 52% 64%; /* #D96A6D */
     --vote-nao-foreground: 0 0% 100%;
     --vote-nao-glow: 358 52% 74%;
 
     /* Vote button background */
-    --vote-button-bg: 185 37% 8%;   /* #0A191A */
-    --vote-track-bg: 186 40% 11%;   /* #102325 */
+    --vote-button-bg: 185 37% 8%; /* #0A191A */
+    --vote-track-bg: 186 40% 11%; /* #102325 */
 
     /* Secondary colors */
     --nav: 58 36% 84%;
@@ -83,7 +83,7 @@
 
   body {
     @apply text-foreground min-h-screen;
-    background: radial-gradient(83.86% 47.1% at 49.87% -20.31%, #2BB6C2 0%, #012F33 100%);
+    background: radial-gradient(83.86% 47.1% at 49.87% -20.31%, #2bb6c2 0%, #012f33 100%);
     overflow-y: scroll; /* Always show vertical scrollbar */
   }
 }
@@ -126,7 +126,7 @@
   .vote-button,
   .vote-button-a,
   .vote-button-b {
-    @apply text-white font-semibold px-6 py-2 rounded-xl flex items-center gap-2;
+    @apply text-white font-semibold px-6 py-2 rounded-xl flex items-center justify-center gap-2;
     background-color: hsl(var(--vote-button-bg));
   }
 
@@ -174,7 +174,7 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-  
+
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
