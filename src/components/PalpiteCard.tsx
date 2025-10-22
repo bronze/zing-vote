@@ -87,7 +87,7 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false, userVote =
           alt="Profile" 
           className="w-10 h-10 rounded-full object-cover"
         /> */}
-        <h3 className="text-sm font-medium text-foreground leading-relaxed flex-1">
+        <h3 className="card-question text-sm font-medium text-foreground leading-relaxed flex-1">
           {question.question_text}
         </h3>
       </div>
@@ -158,10 +158,13 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false, userVote =
       )}
 
       {/* Vote buttons */}
-      <div className="flex gap-2 pt-2 text-sm" onClick={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-      }}>
+      <div
+        className="flex gap-2 pt-2 text-sm"
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+        }}
+      >
         <motion.button
           onClick={(e) => {
             e.preventDefault();
