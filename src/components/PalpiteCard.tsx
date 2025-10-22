@@ -51,10 +51,12 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false, userVote =
   };
 
   return (
-    <div
-      className="palpite-card p-4 space-y-4"
+    <Link
+      to={`/palpite/${question.id}`}
+      className="palpite-card p-4 space-y-4 block cursor-pointer hover:bg-accent/5 transition-colors"
       data-ph-capture-attribute-card={question.question_text}
       data-ph-capture-attribute-category={question.category}
+      aria-label={`Ver detalhes: ${question.question_text}`}
     >
       {/* Header with category and status */}
       <div className="flex items-center justify-between">
@@ -85,11 +87,9 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false, userVote =
           alt="Profile" 
           className="w-10 h-10 rounded-full object-cover"
         /> */}
-        <Link to={`/palpite/${question.id}`} className="flex-1 group">
-          <h3 className="text-sm font-medium text-foreground leading-relaxed group-hover:text-primary transition-colors">
-            {question.question_text}
-          </h3>
-        </Link>
+        <h3 className="text-sm font-medium text-foreground leading-relaxed flex-1">
+          {question.question_text}
+        </h3>
       </div>
 
       {/* Results or loading state */}
@@ -158,9 +158,12 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false, userVote =
       )}
 
       {/* Vote buttons */}
-      <div className="flex gap-2 pt-2 text-sm">
+      <div className="flex gap-2 pt-2 text-sm" onClick={(e) => e.stopPropagation()}>
         <motion.button
-          onClick={() => handleVote("option_a")}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleVote("option_a");
+          }}
           disabled={hasVoted || isVoting || !question.is_open}
           className={`vote-button flex-1 disabled:opacity-50 ${
             hasVoted || isVoting || !question.is_open ? "cursor-default" : "cursor-pointer"
@@ -178,7 +181,10 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false, userVote =
           )}
         </motion.button>
         <motion.button
-          onClick={() => handleVote("option_b")}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleVote("option_b");
+          }}
           disabled={hasVoted || isVoting || !question.is_open}
           className={`vote-button flex-1 disabled:opacity-50 ${
             hasVoted || isVoting || !question.is_open ? "cursor-default" : "cursor-pointer"
@@ -196,6 +202,6 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false, userVote =
           )}
         </motion.button>
       </div>
-    </div>
+    </Link>
   );
 };
