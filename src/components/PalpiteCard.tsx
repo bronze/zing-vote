@@ -158,9 +158,13 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false, userVote =
       )}
 
       {/* Vote buttons */}
-      <div className="flex gap-2 pt-2 text-sm" onClick={(e) => e.stopPropagation()}>
+      <div className="flex gap-2 pt-2 text-sm" onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+      }}>
         <motion.button
           onClick={(e) => {
+            e.preventDefault();
             e.stopPropagation();
             handleVote("option_a");
           }}
@@ -182,6 +186,7 @@ export const PalpiteCard = ({ question, onVote, hasUserVoted = false, userVote =
         </motion.button>
         <motion.button
           onClick={(e) => {
+            e.preventDefault();
             e.stopPropagation();
             handleVote("option_b");
           }}
